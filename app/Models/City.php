@@ -12,7 +12,7 @@ class City extends Model
     protected $fillable = [
         'name',
         'district_id',
-        'delivery_change',
+        'delivery_charge',
         'delivery_status',
     ];
 }

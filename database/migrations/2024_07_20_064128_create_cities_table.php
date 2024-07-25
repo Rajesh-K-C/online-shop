@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',30);
             $table->unsignedBigInteger('district_id');
-            $table->decimal('delivery_change')->default(0);
+            $table->decimal('delivery_charge')->default(0);
             $table->boolean('delivery_status')->default(0);
             $table->timestamps();
             $table->foreign('district_id')->references('id')->on('districts');
