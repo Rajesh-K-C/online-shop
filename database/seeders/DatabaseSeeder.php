@@ -81,10 +81,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name' => 'Test User',
+            'name' => 'Admin',
             'email' => 'test@example.com',
             'password' => Hash::make('password'),
             'role_id' => 1,
+        ]);
+        User::factory()->create([
+            'name' => 'Rajesh KC',
+            'email' => 'rajesh@gmail.com',
+            'password' => Hash::make('password'),
+            'role_id' => 2,
         ]);
     }
 }

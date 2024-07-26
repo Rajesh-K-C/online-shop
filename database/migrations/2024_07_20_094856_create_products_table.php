@@ -22,13 +22,14 @@ return new class extends Migration
             $table->decimal('discount')->nullable();
             $table->decimal('discount_percentage')->nullable();
             $table->integer('stock')->default(0);
+            $table->integer('rank')->default(0);
             $table->boolean('status')->default(0);
             $table->integer('total_sales')->default(0);
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('created_by')->references('id')->on('users');

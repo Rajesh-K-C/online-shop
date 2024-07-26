@@ -67,20 +67,20 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     {{--                    <h6 class="collapse-header">Custom Components:</h6>--}}
-                    <a class="collapse-item" href="#">Create</a>
-                    <a class="collapse-item" href="#">List</a>
+                    <a class="collapse-item" href="{{ route('backend.category.create') }}">Create</a>
+                    <a class="collapse-item" href="{{ route('backend.category.index') }}">List</a>
                 </div>
             </div>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
+        <!-- Nav Item - Settings Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-               aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
+               aria-expanded="true" aria-controls="collapseSettings">
+                <i class="fas fa-fw fa-cog"></i>
                 <span>Setting</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+            <div id="collapseSettings" class="collapse" aria-labelledby="headingSettings"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     {{--                    <h6 class="collapse-header">Custom Utilities:</h6>--}}
@@ -89,14 +89,14 @@
                 </div>
             </div>
         </li>
-        <!-- Nav Item - Role Collapse Menu -->
+        <!-- Nav Item - Roles Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRole"
-               aria-expanded="true" aria-controls="collapseRole">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoles"
+               aria-expanded="true" aria-controls="collapseRoles">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Role</span>
             </a>
-            <div id="collapseRole" class="collapse" aria-labelledby="headingRole"
+            <div id="collapseRoles" class="collapse" aria-labelledby="headingRoles"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="#">Create</a>
@@ -129,6 +129,17 @@
             </div>
         </li>
 
+        <!-- Nav Item - Users -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('backend.user.index')}}">
+                <svg style="width: 20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                    <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                    <path fill="#FFFFFF4D" d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                </svg>
+                <span>Users</span>
+            </a>
+        </li>
+
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item active">
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
@@ -140,9 +151,6 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="login.html">Login</a>
-                    <a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Other Pages:</h6>
                     <a class="collapse-item" href="404.html">404 Page</a>
@@ -374,7 +382,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="#">Logout</a>
+                <a class="btn btn-primary" href="{{route('logout')}}">Logout</a>
             </div>
         </div>
     </div>
