@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\City;
 use App\Models\District;
 use App\Models\Permission;
-use App\Models\Province;
+use App\Models\State;
 use App\Models\Role;
 use App\Models\RolePermission;
 use App\Models\User;
@@ -62,15 +62,13 @@ class DatabaseSeeder extends Seeder
             'permission_id' => 1,
         ]);
 
-        Province::create([
+        State::create([
             'name'=>'Bagmati'
         ]);
 
-
-
         District::create([
             'name' => 'Kathmandu',
-            'province_id' => 1
+            'state_id' => 1
         ]);
 
         City::create([

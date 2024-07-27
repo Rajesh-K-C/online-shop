@@ -24,5 +24,7 @@ Route::prefix('backend')->name('backend.')->group(function () {
     Route::get('/user/search', [App\Http\Controllers\Backend\UserController::class, 'search'])->name('user.search');
 //    Route::get('/user/{id}/edit', [App\Http\Controllers\Backend\UserController::class, 'edit'])->name('backend.user.edit');
 
+    Route::resource('setting', App\Http\Controllers\Backend\SettingController::class);
+
     Route::resource('category', App\Http\Controllers\Backend\CategoryController::class);
 });
