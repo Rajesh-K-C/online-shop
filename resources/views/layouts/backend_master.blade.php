@@ -85,7 +85,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     {{--                    <h6 class="collapse-header">Custom Utilities:</h6>--}}
                     <a class="collapse-item" href="{{route('backend.setting.create')}}">Create</a>
-                    <a class="collapse-item" href="#">List</a>
+                    <a class="collapse-item" href="{{ route('backend.setting.index') }}">List</a>
                 </div>
             </div>
         </li>

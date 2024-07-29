@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SettingRequest extends FormRequest
+class CreateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class SettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|max:30|unique:categories,name',
+            'rank' => 'required|integer',
+            'description' => 'nullable|max:255',
+            'status' => 'required|integer|between:0,1',
+            'thumbnail_file' => 'image|mimes:jpg,jpeg,png,gif|max:1024',
         ];
     }
 }
