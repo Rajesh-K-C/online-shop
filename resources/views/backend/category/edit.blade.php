@@ -44,8 +44,7 @@
                     </div>
                     <div class="form-group">
                         <label for="thumbnail_file" class="form-label">Thumbnail</label>
-                        <input type="file" name="thumbnail_file" accept="image/jpg, image/jpeg, image/png, image/gif" id="thumbnail_file" class="form-control" onchange="imagePreview(this, 'thumbnail_file');"
-                               value="{{ old('thumbnail_file')}}" placeholder="Enter thumbnail_file">
+                        <input type="file" name="thumbnail_file" accept="image/jpg, image/jpeg, image/png, image/gif" id="thumbnail_file" class="form-control" onchange="imagePreview(this, 'thumbnail_file');" placeholder="Enter thumbnail_file">
                         <img {{$data['record']->thumbnail?'':'style="display: none;"'}}src="{{asset('assets/images/category/'. $data['record']->thumbnail)}}" id="thumbnail_file_preview" style="width: min(300px,100%)"  alt="">
                         @include('backend.components.form_element_error', ['field'=> 'thumbnail'])
                     </div>

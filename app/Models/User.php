@@ -46,4 +46,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hasAnyRole(array $roles)
+    {
+        // Assuming admin role has ID 1
+        if ($this->role_id == 1) {
+            return true; // Admin has all permissions
+        }
+        return in_array($this->role->name, $roles);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

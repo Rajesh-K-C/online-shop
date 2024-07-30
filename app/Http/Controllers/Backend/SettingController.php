@@ -56,7 +56,12 @@ class SettingController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['record'] = Setting::find($id);
+        if ($data['record'] == null) {
+            \request()->session()->flash('error', 'Setting Not Found');
+            return redirect(route('backend.setting.index'));
+        }
+        return view('backend.setting.edit', compact('data'));
     }
 
     /**

@@ -10,6 +10,7 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List Category
                     <a href="{{route('backend.category.create')}}" class="btn btn-primary ml-1">Create</a>
+                    <a href="{{route('backend.category.trash')}}" class="btn btn-secondary ml-1">Trash</a>
                 </h6>
             </div>
             <div class="card-body">

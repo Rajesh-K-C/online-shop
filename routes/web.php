@@ -18,13 +18,16 @@ Route::get('logout', [App\Http\Controllers\UserController::class, 'logout'])->na
 
 Route::prefix('backend')->name('backend.')->group(function () {
 //    Route::resource('user',App\Http\Controllers\Backend\UserController::class);
-    Route::get('/user', [App\Http\Controllers\Backend\UserController::class, 'index'])->name('user.index');
-    Route::get('/user/{id}', [App\Http\Controllers\Backend\UserController::class, 'show'])->name('user.show');
-    Route::put('/user/{id}', [App\Http\Controllers\Backend\UserController::class, 'edit'])->name('user.update');
-    Route::get('/user/search', [App\Http\Controllers\Backend\UserController::class, 'search'])->name('user.search');
+    Route::get('/user', [App\Http\Controllers\Backend\UserController::class, 'index'])->name('user.index')->middleware('auth');
+    Route::get('/user/{id}', [App\Http\Controllers\Backend\UserController::class, 'show'])->name('user.show')->middleware('auth');
+    Route::put('/user/{id}', [App\Http\Controllers\Backend\UserController::class, 'edit'])->name('user.update')->middleware('auth');
+    Route::get('/user/search', [App\Http\Controllers\Backend\UserController::class, 'search'])->name('user.search')->middleware('auth');
 //    Route::get('/user/{id}/edit', [App\Http\Controllers\Backend\UserController::class, 'edit'])->name('backend.user.edit');
 
-    Route::resource('setting', App\Http\Controllers\Backend\SettingController::class);
+    Route::resource('setting', App\Http\Controllers\Backend\SettingController::class)->middleware('auth');
 
-    Route::resource('category', App\Http\Controllers\Backend\CategoryController::class);
+    Route::get('/category/trash', [App\Http\Controllers\Backend\CategoryController::class, 'trash'])->name('category.trash')->middleware('auth');
+    Route::get('/category/{id}/restore', [App\Http\Controllers\Backend\CategoryController::class, 'restore'])->name('category.restore')->middleware('auth');
+    Route::delete('/category/{id}/remove', [App\Http\Controllers\Backend\CategoryController::class, 'remove'])->name('category.remove')->middleware('auth');
+    Route::resource('category', App\Http\Controllers\Backend\CategoryController::class)->middleware('auth');
 });
