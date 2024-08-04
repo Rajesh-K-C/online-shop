@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
+            $table->foreignId('order_id')->constrained();
             $table->string('payment_method', 20);
             $table->boolean('status')->default(false);
-            $table->string('transaction_id', 20)->nullable();
+            $table->string('gateway', 20)->nullable();
+            $table->string('transaction_id', 20)->nullable()->unique();
+            $table->string('reference_id', 20)->nullable()->unique();
             $table->timestamps();
         });
     }

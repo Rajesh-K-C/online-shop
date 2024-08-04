@@ -1,6 +1,6 @@
 @extends('layouts.backend_master')
 
-@section('title', 'Category Trash List')
+@section('title', 'List Trash Category')
 
 @section('content')
     <!-- Begin Page Content -->
@@ -8,13 +8,15 @@
         <h1 class="h3 mb-4 text-gray-800">Category Management</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Category Trash List
-{{--                    <a href="{{route('backend.category.create')}}" class="btn btn-primary ml-1">Create</a>--}}
-                    <a href="{{route('backend.category.index')}}" class="btn btn-primary ml-1">List</a>
-                </h6>
+                <div style="display: flex; justify-content: space-between; align-items: center">
+                    <h6 class="m-0 font-weight-bold text-primary">List Trash Category</h6>
+                    <div>
+                        <a href="{{route('backend.category.index')}}" class="btn btn-secondary ml-1">List</a>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
-                @include('backend.components.flash_message')
+                @include('components.flash_message')
                 <table class="table  table-bordered table-responsive">
                     <thead>
                     <tr>
@@ -31,15 +33,18 @@
                         <td>{{ $record->name }}</td>
                         <td>{{ $record->rank }}</td>
                         <td>
-                            @include('backend/components/display_status_message', ['status' => $record->status])
+                            @include('components/display_status_message', ['status' => $record->status])
                         </td>
                         <td>
                             <a href="{{route('backend.category.restore', $record->id)}}" class="btn btn-warning mr-1">Restore</a>
-                            <form  style="display: inline-block" action="{{route('backend.category.remove', $record->id)}}" method="post">
+                            <form style="display: inline-block"
+                                  action="{{route('backend.category.remove', $record->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <input type="hidden" name="_method" value="DELETE" />
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                    Delete
+                                </button>
                             </form>
                         </td>
                         </tr>

@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('address');
             $table->string('landmark')->nullable();
-            $table->unsignedBigInteger('city_id');
+            $table->foreignId('city_id')->constrained();
             $table->timestamps();
-            $table->foreign('city_id')->references('id')->on('cities');
         });
     }
 

@@ -15,9 +15,9 @@ class Category extends Model
     protected  $fillable = [
         'name',
         'rank',
-        'description',
+        'image',
         'status',
-        'thumbnail',
+        'description',
         'created_by',
         'deleted_by',
         'updated_by',
@@ -28,5 +28,10 @@ class Category extends Model
     }
     public function updatedBy(){
         return $this->belongsTo(User::class,'updated_by', 'id');
+    }
+
+    public static function getActiveCategories(){
+        $categories = Category::where('status', '1')->orderBy('rank');
+        return $categories;
     }
 }

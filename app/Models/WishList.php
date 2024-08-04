@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Model
+class WishList extends Model
 {
     use HasFactory;
-
+    protected $table = 'wish_lists';
     protected $fillable = [
-        'name',
-        'description'
+        'user_id',
+        'product_id',
     ];
 }

@@ -13,25 +13,24 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('thumbnail');
+            $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('short_description');
             $table->string('description', 1000);
             $table->decimal('price'); // default 8, 2
-            $table->decimal('discount')->nullable();
-            $table->decimal('discount_percentage')->nullable();
+            $table->decimal('discount_amount')->default(0);
+            $table->decimal('discount_percent', 4)->default(0);
+            $table->string('image');
             $table->integer('stock')->default(0);
             $table->integer('rank')->default(0);
             $table->boolean('status')->default(0);
             $table->integer('total_sales')->default(0);
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreignId('category_id')->constrained();
             $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('deleted_by')->references('id')->on('users');

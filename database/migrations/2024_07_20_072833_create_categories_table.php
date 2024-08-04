@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->integer('rank');
+            $table->string('image');
             $table->boolean('status')->default(false);
             $table->string('description')->nullable();
-            $table->string('thumbnail')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();

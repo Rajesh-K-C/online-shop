@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('role_id')->after('email');
-            $table->unsignedBigInteger('address_id')->after('role_id')->nullable();
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->string('phone', 20)->nullable()->after('email');
+            $table->string('image')->nullable()->after('phone');
+            $table->foreignId('address_id')->nullable()->after('image')->constrained();
         });
     }
 
@@ -25,10 +24,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['role_id']);
             $table->dropForeign(['address_id']);
-            $table->dropColumn('role_id');
             $table->dropColumn('address_id');
+            $table->dropColumn('image');
+            $table->dropColumn('phone');
         });
     }
 };

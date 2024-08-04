@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('code_for');
-            $table->decimal('discount')->nullable();
-            $table->decimal('discount_percent')->nullable();
+            $table->decimal('discount_amount')->default(0);
+            $table->decimal('discount_percent')->default(0);
             $table->string('description', 1000);
             $table->integer('usage_limit')->nullable();
             $table->integer('used_count')->default(0);
@@ -26,7 +26,12 @@ return new class extends Migration
             $table->boolean('status')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
+            $table->unsignedBigInteger('deleted_by');
+            $table->softDeletes();
             $table->timestamps();
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
+            $table->foreign('deleted_by')->references('id')->on('users');
         });
     }
 

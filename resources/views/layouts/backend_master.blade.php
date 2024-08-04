@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,53 +56,104 @@
             Setup
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-               aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Category</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    {{--                    <h6 class="collapse-header">Custom Components:</h6>--}}
-                    <a class="collapse-item" href="{{ route('backend.category.create') }}">Create</a>
-                    <a class="collapse-item" href="{{ route('backend.category.index') }}">List</a>
+        @if(Auth::user()->hasRole('admin'))
+            <!-- Nav Item - Permission Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePermission"
+                   aria-expanded="true" aria-controls="collapsePermission">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Permission</span>
+                </a>
+                <div id="collapsePermission" class="collapse" aria-labelledby="headingPermission"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        {{--                    <h6 class="collapse-header">Custom Components:</h6>--}}
+                        <a class="collapse-item" href="{{ route('backend.permission.create') }}">Create</a>
+                        <a class="collapse-item" href="{{ route('backend.permission.index') }}">List</a>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+            <!-- Nav Item - Role Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRole"
+                   aria-expanded="true" aria-controls="collapseRole">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Role</span>
+                </a>
+                <div id="collapseRole" class="collapse" aria-labelledby="headingRole" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('backend.role.create') }}">Create</a>
+                        <a class="collapse-item" href="{{ route('backend.role.index') }}">List</a>
+                    </div>
+                </div>
+            </li>
 
-        <!-- Nav Item - Settings Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
-               aria-expanded="true" aria-controls="collapseSettings">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Setting</span>
-            </a>
-            <div id="collapseSettings" class="collapse" aria-labelledby="headingSettings"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    {{--                    <h6 class="collapse-header">Custom Utilities:</h6>--}}
-                    <a class="collapse-item" href="{{route('backend.setting.create')}}">Create</a>
-                    <a class="collapse-item" href="{{ route('backend.setting.index') }}">List</a>
+            <!-- Nav Item - Users -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('backend.user.index')}}">
+                    <svg style="width: 20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                        <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path fill="#FFFFFF4D"
+                              d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                    </svg>
+                    <span>Users</span>
+                </a>
+            </li>
+        @endif
+
+        @if(Auth::user()->hasPermissionTo('manage-setting'))
+            <!-- Nav Item - Settings Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
+                   aria-expanded="true" aria-controls="collapseSettings">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Setting</span>
+                </a>
+                <div id="collapseSettings" class="collapse" aria-labelledby="headingSettings"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        {{--                    <h6 class="collapse-header">Custom Utilities:</h6>--}}
+                        <a class="collapse-item" href="{{route('backend.setting.create')}}">Create</a>
+                        <a class="collapse-item" href="{{ route('backend.setting.index') }}">List</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <!-- Nav Item - Roles Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoles"
-               aria-expanded="true" aria-controls="collapseRoles">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Role</span>
-            </a>
-            <div id="collapseRoles" class="collapse" aria-labelledby="headingRoles"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="#">Create</a>
-                    <a class="collapse-item" href="#">List</a>
+            </li>
+        @endif
+
+        @if (Auth::user()->hasPermissionTo('manage-address'))
+            <!-- Nav Item - State Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseState"
+                   aria-expanded="true" aria-controls="collapseState">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>State</span>
+                </a>
+                <div id="collapseState" class="collapse" aria-labelledby="headingState" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('backend.state.create') }}">Create</a>
+                        <a class="collapse-item" href="{{ route('backend.state.index') }}">List</a>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+        @endif
+
+        @if (Auth::user()->hasPermissionTo('manage-category'))
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Category</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        {{--                    <h6 class="collapse-header">Custom Components:</h6>--}}
+                        <a class="collapse-item" href="{{ route('backend.category.create') }}">Create</a>
+                        <a class="collapse-item" href="{{ route('backend.category.index') }}">List</a>
+                    </div>
+                </div>
+            </li>
+        @endif
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -113,33 +163,23 @@
             Operation
         </div>
 
-
-        <!-- Nav Item - Product Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct"
-               aria-expanded="true" aria-controls="collapseProduct">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Product</span>
-            </a>
-            <div id="collapseProduct" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="#">Create</a>
-                    <a class="collapse-item" href="#">List</a>
+        @if(Auth::user()->hasPermissionTo('manage-product'))
+            <!-- Nav Item - Product Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct"
+                   aria-expanded="true" aria-controls="collapseProduct">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Product</span>
+                </a>
+                <div id="collapseProduct" class="collapse" aria-labelledby="headingProduct"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">Create</a>
+                        <a class="collapse-item" href="#">List</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-
-        <!-- Nav Item - Users -->
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('backend.user.index')}}">
-                <svg style="width: 20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                    <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path fill="#FFFFFF4D" d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/>
-                </svg>
-                <span>Users</span>
-            </a>
-        </li>
-
+            </li>
+        @endif
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item active">
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
@@ -153,22 +193,22 @@
                     <h6 class="collapse-header">Login Screens:</h6>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item active" href="blank.html">Blank Page</a>
+                    <a class="collapse-item" href="#">404 Page</a>
+                    <a class="collapse-item active" href="#">Blank Page</a>
                 </div>
             </div>
         </li>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Charts</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Tables</span></a>
         </li>
@@ -198,46 +238,46 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- Topbar Search -->
-                <form
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                               aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                {{--                <!-- Topbar Search -->--}}
+                {{--                <form--}}
+                {{--                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">--}}
+                {{--                    <div class="input-group">--}}
+                {{--                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."--}}
+                {{--                               aria-label="Search" aria-describedby="basic-addon2">--}}
+                {{--                        <div class="input-group-append">--}}
+                {{--                            <button class="btn btn-primary" type="button">--}}
+                {{--                                <i class="fas fa-search fa-sm"></i>--}}
+                {{--                            </button>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </form>--}}
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                             aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                           placeholder="Search for..." aria-label="Search"
-                                           aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
+                    {{--                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->--}}
+                    {{--                    <li class="nav-item dropdown no-arrow d-sm-none">--}}
+                    {{--                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"--}}
+                    {{--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                    {{--                            <i class="fas fa-search fa-fw"></i>--}}
+                    {{--                        </a>--}}
+                    {{--                        <!-- Dropdown - Messages -->--}}
+                    {{--                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"--}}
+                    {{--                             aria-labelledby="searchDropdown">--}}
+                    {{--                            <form class="form-inline mr-auto w-100 navbar-search">--}}
+                    {{--                                <div class="input-group">--}}
+                    {{--                                    <input type="text" class="form-control bg-light border-0 small"--}}
+                    {{--                                           placeholder="Search for..." aria-label="Search"--}}
+                    {{--                                           aria-describedby="basic-addon2">--}}
+                    {{--                                    <div class="input-group-append">--}}
+                    {{--                                        <button class="btn btn-primary" type="button">--}}
+                    {{--                                            <i class="fas fa-search fa-sm"></i>--}}
+                    {{--                                        </button>--}}
+                    {{--                                    </div>--}}
+                    {{--                                </div>--}}
+                    {{--                            </form>--}}
+                    {{--                        </div>--}}
+                    {{--                    </li>--}}
 
                     <!-- Nav Item - Messages -->
                     <li class="nav-item dropdown no-arrow mx-1">
@@ -255,52 +295,58 @@
                             </h6>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                    <img class="rounded-circle"
+                                         src="{{asset('assets/backend/img/undraw_profile_1.svg')}}"
                                          alt="...">
                                     <div class="status-indicator bg-success"></div>
                                 </div>
                                 <div class="font-weight-bold">
                                     <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                        problem I've been having.</div>
+                                        problem I've been having.
+                                    </div>
                                     <div class="small text-gray-500">Emily Fowler · 58m</div>
                                 </div>
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                    <img class="rounded-circle"
+                                         src="{{asset('assets/backend/img/undraw_profile_2.svg')}}"
                                          alt="...">
                                     <div class="status-indicator"></div>
                                 </div>
                                 <div>
                                     <div class="text-truncate">I have the photos that you ordered last month, how
-                                        would you like them sent to you?</div>
+                                        would you like them sent to you?
+                                    </div>
                                     <div class="small text-gray-500">Jae Chun · 1d</div>
                                 </div>
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                    <img class="rounded-circle"
+                                         src="{{asset('assets/backend/img/undraw_profile_3.svg')}}"
                                          alt="...">
                                     <div class="status-indicator bg-warning"></div>
                                 </div>
                                 <div>
                                     <div class="text-truncate">Last month's report looks great, I am very happy with
-                                        the progress so far, keep up the good work!</div>
+                                        the progress so far, keep up the good work!
+                                    </div>
                                     <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                 </div>
                             </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                         alt="...">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                        told me that people say this to all dogs, even if they aren't good...</div>
-                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                </div>
-                            </a>
+                            {{--                            <a class="dropdown-item d-flex align-items-center" href="#">--}}
+                            {{--                                <div class="dropdown-list-image mr-3">--}}
+                            {{--                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"--}}
+                            {{--                                         alt="...">--}}
+                            {{--                                    <div class="status-indicator bg-success"></div>--}}
+                            {{--                                </div>--}}
+                            {{--                                <div>--}}
+                            {{--                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone--}}
+                            {{--                                        told me that people say this to all dogs, even if they aren't good...</div>--}}
+                            {{--                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>--}}
+                            {{--                                </div>--}}
+                            {{--                            </a>--}}
                             <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                         </div>
                     </li>
@@ -382,7 +428,10 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{route('logout')}}">Logout</a>
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Logout</button>
+                </form>
             </div>
         </div>
     </div>

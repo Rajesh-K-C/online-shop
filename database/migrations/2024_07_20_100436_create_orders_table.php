@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->decimal('sub_total', 10);
-            $table->decimal('total_discount', 10)->nullable();
+            $table->decimal('total_discount', 10)->default(0);
             $table->decimal('grand_total', 10);
             $table->tinyInteger('status')->default(0);
-            $table->string('phone_number',16);
-            $table->string('shipping_address')->nullable();
+//            $table->enum('status', ['Pending', 'Confirmed', 'Processing','Shipped','OutForDelivery','Delivered','Cancelled','Returned']);
+            $table->string('phone_number',20);
+            $table->string('shipping_address');
             $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('delivery_agent')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
+            $table->foreign('delivery_agent')->references('id')->on('users');
         });
     }
 

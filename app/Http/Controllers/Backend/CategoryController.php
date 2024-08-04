@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateCategoryRequest;
-use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,14 +41,14 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateCategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
         $request->request->add(['created_by' => Auth::user()->id]);
-        if ($request->hasFile('thumbnail_file')) {
-            $thumbnail_file = $request->file('thumbnail_file');
-            $filename = time() . '.' . $thumbnail_file->getClientOriginalExtension();
-            $thumbnail_file->move($this->base_image_folder, $filename);
-            $request->request->add(['thumbnail' => $filename]);
+        if ($request->hasFile('image_file')) {
+            $image_file = $request->file('image_file');
+            $filename = time() . '.' . $image_file->getClientOriginalExtension();
+            $image_file->move($this->base_image_folder, $filename);
+            $request->request->add(['image' => $filename]);
         }
         $record = $this->model->create($request->all());
         if ($record) {
@@ -91,20 +90,21 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, string $id)
+    public function update(CategoryRequest $request, string $id)
     {
         $data['record'] = $this->model->find($id);
         if ($data['record'] == null) {
             \request()->session()->flash('error', $this->model_name . ' Not Found');
             return redirect(route($this->base_route . 'index'));
         }
-        if ($request->hasFile('thumbnail_file')) {
-            $thumbnail_file = $request->file('thumbnail_file');
-            $filename = time() . '.' . $thumbnail_file->getClientOriginalExtension();
-            $thumbnail_file->move(public_path($this->base_image_folder), $filename);
-            $request->request->add(['thumbnail' => $filename]);
-            unlink(public_path($this->base_image_folder . '/' . $data['record']->thumbnail));
+        if ($request->hasFile('image_file')) {
+            $image_file = $request->file('image_file');
+            $filename = time() . '.' . $image_file->getClientOriginalExtension();
+            $image_file->move(public_path($this->base_image_folder), $filename);
+            $request->request->add(['image' => $filename]);
+            unlink(public_path($this->base_image_folder . '/' . $data['record']->image));
         }
+
         $request->request->add(['updated_by' => auth()->user()->id]);
 
         if ($data['record']->update($request->all())) {
@@ -112,7 +112,7 @@ class CategoryController extends Controller
             return redirect(route($this->base_route . 'index'));
         } else {
             $request->session()->flash('error', $this->model_name . ' Update Failed');
-            return redirect(route('backend.edit.create'));
+            return redirect(route($this->base_route .'edit'));
         }
     }
 
@@ -158,8 +158,8 @@ class CategoryController extends Controller
         $data['record'] = $this->model->where('id', $id)->onlyTrashed()->first();
         if ($data['record']->forceDelete()) {
             \request()->session()->flash('success', $this->model_name . ' Deleted Successfully');
-            if ($data['record']->thumbnail && file_exists($this->base_image_folder . '/' . $data['record']->thumbnail)) {
-                unlink(public_path($this->base_image_folder . '/' . $data['record']->thumbnail));
+            if ($data['record']->image && file_exists($this->base_image_folder . '/' . $data['record']->image)) {
+                unlink(public_path($this->base_image_folder . '/' . $data['record']->image));
             }
         } else {
             \request()->session()->flash('error', $this->model_name . ' Deletion Failed');
@@ -167,4 +167,6 @@ class CategoryController extends Controller
 
         return redirect()->route($this->base_route . 'trash');
     }
+
+
 }
