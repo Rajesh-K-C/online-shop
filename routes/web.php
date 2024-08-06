@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
             Route::resource('category', App\Http\Controllers\Backend\CategoryController::class);
         });
         // State, District, and City Routes
-        Route::group(['middleware' => ['permission:manage-address']], function () {
+        Route::group(['middleware' => ['permission:manage-location']], function () {
             Route::resource('state', App\Http\Controllers\Backend\StateController::class);
             Route::resource('district', App\Http\Controllers\Backend\DistrictController::class);
             Route::resource('city', App\Http\Controllers\Backend\CityController::class);

@@ -13,7 +13,6 @@ class UserController extends Controller
     public string $model_name = 'User';
     public string $base_route = 'backend.user.';
     public string $base_view_folder = 'backend.user.';
-    public string $base_image_folder = 'assets/images/user';
 
     public User $model;
 
@@ -24,8 +23,11 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->model->all();
-        return view($this->base_view_folder.'index', compact('users'));
+        $data['records'] = $this->model->whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'user');
+        })->get();
+//        $data['records'] = $this->model->all();
+        return view($this->base_view_folder . 'index', compact('data'));
     }
 
     public function search($query)
@@ -54,8 +56,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = $this->model->findOrFail($id);
-        return view($this->base_view_folder.'show', compact('user'));
+        $data['record'] = $this->model->findOrFail($id);
+        return view($this->base_view_folder . 'show', compact('data'));
     }
 
     /**
@@ -69,7 +71,7 @@ class UserController extends Controller
             return redirect(route($this->base_route . 'index'));
         }
         if ($data['record']->getRoleNames()[0] == 'admin') {
-            \request()->session()->flash('error', 'This '.$this->model_name . ' is not editable');
+            \request()->session()->flash('error', 'This ' . $this->model_name . ' is not editable');
             return redirect(route($this->base_route . 'index'));
         }
         $data['roles'] = Role::all();
@@ -89,13 +91,13 @@ class UserController extends Controller
             return redirect(route($this->base_route . 'index'));
         }
 
-        if ($data['record']->update(['status'=> $request->status])) {
+        if ($data['record']->update(['status' => $request->status])) {
             $data['record']->syncRoles($request->role);
             \request()->session()->flash('success', $this->model_name . ' Updated Successfully');
             return redirect(route($this->base_route . 'index'));
         } else {
             $request->session()->flash('error', $this->model_name . ' Update Failed');
-            return redirect(route($this->base_route .'edit'));
+            return redirect(route($this->base_route . 'edit'));
         }
     }
 

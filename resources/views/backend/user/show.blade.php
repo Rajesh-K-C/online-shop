@@ -27,35 +27,34 @@
                             <tbody>
                             <tr>
                                 <th>ID</th>
-                                <td>{{$user->id}}</td>
+                                <td>{{$data['record']->id}}</td>
                             </tr>
                             <tr>
                                 <th>Name</th>
-                                <td>{{$user->name}}</td>
+                                <td>{{$data['record']->name}}</td>
                             </tr>
                             <tr>
                                 <th>Email</th>
-                                <td>{{$user->email}}</td>
+                                <td>{{$data['record']->email}}</td>
                             </tr>
                             <tr>
                                 <th>Role</th>
                                 <td>
-                                    {{$user->getRoleNames()[0]}}
-                                    {{--                                @include('backend/category/check_category_status', ['status' => $category->status])--}}
+                                    {{$data['record']->getRoleNames()[0]}}
                                 </td>
                             </tr>
                             <tr>
                                 <th>Phone Number</th>
-                                <td>{{$user->phone}}</td>
+                                <td>{{$data['record']->phone}}</td>
                             </tr>
                             <tr>
                                 <th>Address</th>
-                                <td>{{$user->address}}</td>
+                                <td>{{$data['record']->address}}</td>
                             </tr>
                             <tr>
                                 <th>Status</th>
                                 <td>
-                                    @include('components.display_status_message', ['status'=> $user->status])
+                                    @include('components.display_status_message', ['status'=> $data['record']->status])
                                 </td>
                             </tr>
                             </tbody>

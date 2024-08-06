@@ -30,24 +30,25 @@
                     </thead>
                     <tbody>
                     @forelse($data['records'] as $record)
-                        <td>{{$loop->index + 1}}</td>
-                        <td>{{ $record->setting_name }}</td>
-                        <td>{{ $record->website_name }}</td>
-                        <td>
-                            @include('components/display_status_message', ['status' => $record->status])
-                        </td>
-                        <td style="display: flex">
-                            <a href="{{route('backend.setting.show', $record->id)}}"
-                               class="btn btn-primary mr-1">View</a>
-                            <a href="{{ route('backend.setting.edit', $record->id) }}"
-                               class="btn btn-success mr-1">Edit</a>
-                            <form action="{{route('backend.setting.destroy', $record->id)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="_method" value="DELETE"/>
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
+                        <tr>
+                            <td>{{$loop->index + 1}}</td>
+                            <td>{{ $record->setting_name }}</td>
+                            <td>{{ $record->website_name }}</td>
+                            <td>
+                                @include('components/display_status_message', ['status' => $record->status])
+                            </td>
+                            <td style="display: flex">
+                                <a href="{{route('backend.setting.show', $record->id)}}"
+                                   class="btn btn-primary mr-1">View</a>
+                                <a href="{{ route('backend.setting.edit', $record->id) }}"
+                                   class="btn btn-success mr-1">Edit</a>
+                                <form action="{{route('backend.setting.destroy', $record->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @empty
                         <td colspan="5" class="text-center">Categories not found!</td>

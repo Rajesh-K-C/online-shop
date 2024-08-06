@@ -120,18 +120,23 @@
             </li>
         @endif
 
-        @if (Auth::user()->hasPermissionTo('manage-address'))
-            <!-- Nav Item - State Collapse Menu -->
+        @if (Auth::user()->hasPermissionTo('manage-location'))
+            <!-- Nav Item - Location Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseState"
-                   aria-expanded="true" aria-controls="collapseState">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLocation"
+                   aria-expanded="true" aria-controls="collapseLocation">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>State</span>
+                    <span>Location</span>
                 </a>
-                <div id="collapseState" class="collapse" aria-labelledby="headingState" data-parent="#accordionSidebar">
+                <div id="collapseLocation" class="collapse" aria-labelledby="headingLocation"
+                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('backend.state.create') }}">Create</a>
-                        <a class="collapse-item" href="{{ route('backend.state.index') }}">List</a>
+                        <a class="collapse-item" href="{{ route('backend.state.create') }}">State Create</a>
+                        <a class="collapse-item" href="{{ route('backend.state.index') }}">State List</a>
+                        <a class="collapse-item" href="{{ route('backend.district.create') }}">District Create</a>
+                        <a class="collapse-item" href="{{ route('backend.district.index') }}">District List</a>
+                        <a class="collapse-item" href="{{ route('backend.city.create') }}">City Create</a>
+                        <a class="collapse-item" href="{{ route('backend.city.index') }}">City List</a>
                     </div>
                 </div>
             </li>

@@ -41,36 +41,29 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if(count($users) == 0)
+                    @forelse($data['records'] as $key=> $record)
+                        <tr>
+                            <td>{{$key + 1}}</td>
+                            <td>{{ $record->name }}</td>
+                            <td>{{ $record->email }}</td>
+                            <td>
+                                @include('components/display_status_message', ['status' => $record->status])
+                            </td>
+                            <td style="display: flex">
+                                <a href="{{route('backend.user.show', $record->id)}}"
+                                   class="btn btn-primary mr-1">View</a>
+                                @if($record->getRoleNames()[0] === 'admin')
+                                    <button class="btn btn-success mr-1" disabled>Edit</button>
+                                @else
+                                    <a href="{{ route('backend.user.edit', $record->id) }}" class="btn btn-success mr-1">Edit</a>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
                         <tr>
                             <td colspan="5" class="text-center">Categories not found!</td>
                         </tr>
-                    @endif
-                    @foreach($users as $key=> $user)
-                        <tr>
-                            <td>{{$key + 1}}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                                @include('components/display_status_message', ['status' => $user->status])
-                            </td>
-                            <td style="display: flex">
-                                <a href="{{route('backend.user.show', $user->id)}}"
-                                   class="btn btn-primary mr-1">View</a>
-                                @if($user->getRoleNames()[0] === 'admin')
-                                    <button class="btn btn-success mr-1" disabled>Edit</button>
-                                @else
-                                    <a href="{{ route('backend.user.edit', $user->id) }}" class="btn btn-success mr-1">Edit</a>
-                                @endif
-                                {{--                        <form action="{{route('backend.user.destroy', $user->id)}}" method="post">--}}
-                                {{--                            @csrf--}}
-                                {{--                            --}}{{--                                        @method('DELETE')--}}
-                                {{--                            <input type="hidden" name="_method" value="DELETE" />--}}
-                                {{--                            <button type="submit" class="btn btn-danger">Delete</button>--}}
-                                {{--                        </form>--}}
-                            </td>
-                        </tr>
-                    @endforeach
+                    @endforelse
                     </tbody>
                 </table>
             </div>

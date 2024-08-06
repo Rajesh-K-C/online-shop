@@ -20,7 +20,7 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label class="form-label" for="name">Setting Name*</label>
+                        <label class="form-label" for="name">Setting Name</label>
                         <input type="text" class="form-control" value="{{ $data['record']->name }}" name="name"
                                id="name">
                         @include('components.form_element_error', ['field'=> 'name'])
@@ -33,8 +33,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('js')
-    {{--    <script src="{{asset('assets/backend/js/imagePreview.js')}}"></script>--}}
 @endsection

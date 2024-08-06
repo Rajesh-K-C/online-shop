@@ -167,6 +167,4 @@ class CategoryController extends Controller
 
         return redirect()->route($this->base_route . 'trash');
     }
-
-
 }

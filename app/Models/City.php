@@ -15,9 +15,18 @@ class City extends Model
         'district_id',
         'delivery_charge',
         'delivery_status',
+        'created_by',
+        'updated_by',
     ];
 
     public function getDistrict(){
-        return $this->belongsTo(District::class, 'id', 'district_id');
+        return $this->belongsTo(District::class, 'district_id');
+    }
+
+    public function createdBy(){
+        return $this->belongsTo(User::class,'created_by', 'id');
+    }
+    public function updatedBy(){
+        return $this->belongsTo(User::class,'updated_by', 'id');
     }
 }
