@@ -1,0 +1,21 @@
+.image-preview, .icon-preview {
+    position: relative;
+    z-index: 0;
+    margin-top: .5rem;
+    display: none;
+    border: 1px solid black;
+}
+
+.image-preview {
+    max-width: min(18.75rem, 100%);
+    max-height: min(18.75rem, 100%);
+}
+
+.icon-preview {
+    max-width: min(4rem, 100%);
+    max-height: min(4rem, 100%);
+}
+
+.preview-block {
+    display: block;
+}

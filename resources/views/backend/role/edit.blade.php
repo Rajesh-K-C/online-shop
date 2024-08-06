@@ -15,13 +15,12 @@
             </div>
             <div class="card-body">
                 @include('components.flash_message')
-                <form method="post" action="{{ route('backend.role.update', $data['record']->id) }}"
-                      enctype="multipart/form-data">
+                <form method="post" action="{{ route('backend.role.update', $data['record']->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
                         <label class="form-label" for="name">Role Name</label>
-                        <input type="text" class="form-control" value="{{ $data['record']->name }}" {{ $data['record']->name === 'admin'?"readonly":"" }} name="name"
+                        <input type="text" class="form-control" value="{{ $data['record']->name }}" {{ ($data['record']->name === 'admin' || $data['record']->name === 'user')?"readonly":"" }} name="name"
                                id="name">
                         @include('components.form_element_error', ['field'=> 'name'])
                     </div>

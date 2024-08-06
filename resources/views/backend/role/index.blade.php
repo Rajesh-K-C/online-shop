@@ -40,7 +40,7 @@
                                 {{--                                   class="btn btn-primary mr-1">View</a>--}}
                                 <a href="{{ route('backend.role.edit', $record->id) }}"
                                    class="btn btn-success mr-1">Edit</a>
-                                @if($record->name !== 'admin')
+                                @if($record->name !== 'admin' && $record->name !== 'user')
                                 <form style="display: inline-block"
                                       action="{{route('backend.role.destroy', $record->id)}}" method="post">
                                     @csrf

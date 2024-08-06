@@ -28,7 +28,7 @@ class CityRequest extends FormRequest
 
         return [
             'name' => $name_rule,
-            'district_id' => 'required|integer',
+            'district_id' => 'required|integer|exists:districts,id',
             'delivery_charge' => [
                 'required',
                 'regex:/^\d{2,3}(\.\d{1,2}0*)?$/', // Ensures the value is a float with up to two decimal places

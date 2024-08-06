@@ -28,7 +28,7 @@ class DistrictRequest extends FormRequest
 
         return [
             'name' => $name_rule,
-            'state' => 'required|integer'
+            'state' => 'required|integer|exists:states,id'
         ];
     }
 }

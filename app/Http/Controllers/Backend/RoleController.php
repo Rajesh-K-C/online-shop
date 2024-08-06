@@ -116,7 +116,12 @@ class RoleController extends Controller
 //        }
 //
 //        $request->request->add(['updated_by' => auth()->user()->id]);
-        $record = $data['record']->update($request->all());
+//        dd($request->permission);
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('user')) {
+            $record = $data['record']->update(['permission' => $request->permission]);
+        } else {
+            $record = $data['record']->update($request->all());
+        }
         if ($record) {
             if ($data['record']->syncPermissions($request->permission)) {
                 $request->session()->flash('success', $this->model_name . ' Created Successfully');

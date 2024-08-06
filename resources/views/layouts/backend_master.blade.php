@@ -179,8 +179,8 @@
                 <div id="collapseProduct" class="collapse" aria-labelledby="headingProduct"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Create</a>
-                        <a class="collapse-item" href="#">List</a>
+                        <a class="collapse-item" href="{{route('backend.product.create')}}">Create</a>
+                        <a class="collapse-item" href="{{route('backend.product.index')}}">List</a>
                     </div>
                 </div>
             </li>

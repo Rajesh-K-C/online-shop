@@ -41,6 +41,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/category/{category}/restore', [App\Http\Controllers\Backend\CategoryController::class, 'restore'])->name('category.restore');
             Route::delete('/category/{category}/remove', [App\Http\Controllers\Backend\CategoryController::class, 'remove'])->name('category.remove');
 
+            // Product Trash Routes
+            Route::get('/product/trash', [App\Http\Controllers\Backend\ProductController::class, 'trash'])->name('product.trash');
+            Route::get('/product/{product}/restore', [App\Http\Controllers\Backend\ProductController::class, 'restore'])->name('product.restore');
+            Route::delete('/product/{product}/remove', [App\Http\Controllers\Backend\ProductController::class, 'remove'])->name('product.remove');
+
         });
 
         // Setting Routes
@@ -56,6 +61,10 @@ Route::middleware('auth')->group(function () {
             Route::resource('state', App\Http\Controllers\Backend\StateController::class);
             Route::resource('district', App\Http\Controllers\Backend\DistrictController::class);
             Route::resource('city', App\Http\Controllers\Backend\CityController::class);
+        });
+        // Product Routes
+        Route::group(['middleware' => ['permission:manage-product']], function () {
+            Route::resource('product', App\Http\Controllers\Backend\ProductController::class);
         });
     });
 });

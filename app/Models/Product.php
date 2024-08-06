@@ -30,5 +30,13 @@ class Product extends Model
         'updated_by',
         'deleted_by',
     ];
-
+    public function getCategory(){
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+    public function getCreatedBy(){
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+    public function getUpdatedBy(){
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
 }

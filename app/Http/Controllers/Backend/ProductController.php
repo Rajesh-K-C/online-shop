@@ -3,22 +3,23 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
-    public string $model_name = 'Category';
-    public string $base_route = 'backend.category.';
-    public string $base_view_folder = 'backend.category.';
-    public string $base_image_folder = 'assets/images/category';
+    public string $model_name = 'Product';
+    public string $base_route = 'backend.product.';
+    public string $base_view_folder = 'backend.product.';
+    public string $base_image_folder = 'assets/images/product';
 
-    public Category $model;
+    public Product $model;
 
     public function __construct()
     {
-        $this->model = new Category();
+        $this->model = new Product();
     }
 
     /**
@@ -35,18 +36,22 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view($this->base_view_folder . 'create');
+        $data['records'] = Category::all();
+        return view($this->base_view_folder . 'create', compact('data'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request)
+    public function store(ProductRequest $request)
     {
-        $request->request->add(['created_by' => Auth::user()->id]);
+        $request->request->add([
+            'created_by' => Auth::user()->id,
+            'category_id' => $request->category,
+        ]);
         if ($request->hasFile('image_file')) {
             $image_file = $request->file('image_file');
-            $filename = time()  .'_'. Auth::user()->id . '.' . $image_file->getClientOriginalExtension();
+            $filename = time() . '_' . Auth::user()->id . '.' . $image_file->getClientOriginalExtension();
             $image_file->move($this->base_image_folder, $filename);
             $request->request->add(['image' => $filename]);
         }
@@ -84,13 +89,14 @@ class CategoryController extends Controller
             \request()->session()->flash('error', $this->model_name . ' Not Found');
             return redirect(route($this->base_route . 'index'));
         }
+        $data['categories'] = Category::all();
         return view($this->base_view_folder . 'edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
         $data['record'] = $this->model->find($id);
         if ($data['record'] == null) {
@@ -99,20 +105,22 @@ class CategoryController extends Controller
         }
         if ($request->hasFile('image_file')) {
             $image_file = $request->file('image_file');
-            $filename = time() .'_'. Auth::user()->id .  '.' . $image_file->getClientOriginalExtension();
+            $filename = time() . '_' . Auth::user()->id . '.' . $image_file->getClientOriginalExtension();
             $image_file->move(public_path($this->base_image_folder), $filename);
             $request->request->add(['image' => $filename]);
             unlink(public_path($this->base_image_folder . '/' . $data['record']->image));
         }
-
-        $request->request->add(['updated_by' => auth()->user()->id]);
+        $request->request->add([
+            'updated_by' => Auth::user()->id,
+            'category_id'=>$request->category,
+        ]);
 
         if ($data['record']->update($request->all())) {
             $request->session()->flash('success', $this->model_name . ' Updated Successfully');
             return redirect(route($this->base_route . 'index'));
         } else {
             $request->session()->flash('error', $this->model_name . ' Update Failed');
-            return redirect(route($this->base_route .'edit'));
+            return redirect(route($this->base_route . 'edit'));
         }
     }
 
@@ -164,7 +172,6 @@ class CategoryController extends Controller
         } else {
             \request()->session()->flash('error', $this->model_name . ' Deletion Failed');
         }
-
         return redirect()->route($this->base_route . 'trash');
     }
 }
