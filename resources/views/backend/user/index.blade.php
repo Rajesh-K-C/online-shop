@@ -6,18 +6,18 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <h1 class="h3 mb-4 text-gray-800">User Management</h1>
-        <form style="display: flex; justify-content: center; margin-bottom: 1rem">
-            <div class="input-group" style="width: min(20rem, 100%)">
-                <input type="text" class="form-control bg-light border-0 small"
-                       placeholder="Search user..." aria-label="Search" name="query" style="outline: 1px solid rgba(0,0,0,0.26)"
-                       aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+{{--        <form style="display: flex; justify-content: center; margin-bottom: 1rem">--}}
+{{--            <div class="input-group" style="width: min(20rem, 100%)">--}}
+{{--                <input type="text" class="form-control bg-light border-0 small"--}}
+{{--                       placeholder="Search user..." aria-label="Search" name="query" style="outline: 1px solid rgba(0,0,0,0.26)"--}}
+{{--                       aria-describedby="basic-addon2">--}}
+{{--                <div class="input-group-append">--}}
+{{--                    <button class="btn btn-primary" type="submit">--}}
+{{--                        <i class="fas fa-search fa-sm"></i>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </form>--}}
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div style="display: flex; justify-content: space-between; align-items: center">

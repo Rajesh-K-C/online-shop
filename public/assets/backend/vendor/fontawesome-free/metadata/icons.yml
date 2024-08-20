@@ -4407,7 +4407,7 @@ comment:
       - commenting
       - conversation
       - feedback
-      - message
+      - contact
       - note
       - notification
       - sms
@@ -4431,7 +4431,7 @@ comment-alt:
       - commenting
       - conversation
       - feedback
-      - message
+      - contact
       - note
       - notification
       - sms
@@ -4453,7 +4453,7 @@ comment-dollar:
       - commenting
       - conversation
       - feedback
-      - message
+      - contact
       - money
       - note
       - notification
@@ -4478,7 +4478,7 @@ comment-dots:
       - commenting
       - conversation
       - feedback
-      - message
+      - contact
       - more
       - note
       - notification
@@ -4504,7 +4504,7 @@ comment-medical:
       - conversation
       - diagnose
       - feedback
-      - message
+      - contact
       - note
       - notification
       - prescription
@@ -4527,7 +4527,7 @@ comment-slash:
       - commenting
       - conversation
       - feedback
-      - message
+      - contact
       - mute
       - note
       - notification
@@ -4552,7 +4552,7 @@ comments:
       - commenting
       - conversation
       - feedback
-      - message
+      - contact
       - note
       - notification
       - sms
@@ -4574,7 +4574,7 @@ comments-dollar:
       - commenting
       - conversation
       - feedback
-      - message
+      - contact
       - money
       - note
       - notification
@@ -6321,7 +6321,7 @@ envelope:
       - email
       - letter
       - mail
-      - message
+      - contact
       - notification
       - support
   styles:
@@ -6342,7 +6342,7 @@ envelope-open:
       - email
       - letter
       - mail
-      - message
+      - contact
       - notification
       - support
   styles:
@@ -6362,7 +6362,7 @@ envelope-open-text:
       - email
       - letter
       - mail
-      - message
+      - contact
       - notification
       - support
   styles:
@@ -6380,7 +6380,7 @@ envelope-square:
       - email
       - letter
       - mail
-      - message
+      - contact
       - notification
       - support
   styles:
@@ -10706,7 +10706,7 @@ inbox:
       - desk
       - email
       - mail
-      - message
+      - contact
   styles:
     - solid
   unicode: f01c
@@ -15463,7 +15463,7 @@ reply:
   search:
     terms:
       - mail
-      - message
+      - contact
       - respond
   styles:
     - solid
@@ -15477,7 +15477,7 @@ reply-all:
   search:
     terms:
       - mail
-      - message
+      - contact
       - respond
   styles:
     - solid
@@ -17001,7 +17001,7 @@ sms:
     terms:
       - chat
       - conversation
-      - message
+      - contact
       - mobile
       - notification
       - phone
@@ -17871,7 +17871,7 @@ sticky-note:
   label: Sticky Note
   search:
     terms:
-      - message
+      - contact
       - note
       - paper
       - reminder
@@ -20919,7 +20919,7 @@ voicemail:
     terms:
       - answer
       - inbox
-      - message
+      - contact
       - phone
   styles:
     - solid

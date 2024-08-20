@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ProductIsActive;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class CartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -41,32 +42,20 @@ class ProductRequest extends FormRequest
         }
 
         return [
-            'name' => $name_rule,
-            'slug' => $slug_rule,
-            'short_description' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'price' => [
-                'required',
-                'regex:/^\d{2,8}(\.\d{1,2}0*)?$/',
-            ],
-            'discount_percent' => [
-                'required',
-                'regex:/^\d{1,2}(\.\d{1,2}0*)?$/',
-            ],
-            'image_file' => $image_rule,
-            'stock' => 'required|integer|min:0|max:200',
-            'rank' => 'required|integer|min:0',
-            'status' => 'required|integer|between:0,1',
-            'category' => 'required|integer|exists:categories,id',
+            'product_id' => ['required', 'integer', 'exists:products,id', new ProductIsActive()],
+            'quantity' => ['required', 'integer', 'min:0'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'price.regex' => 'The price is between 10 to 999,999 with a precision 2 decimal places.',
-            'slug.regex' => 'The :attribute must not contain any spaces.',
-//            'discount_percent.regex'=> 'The discount percent is a precision number.',
+            'product_id.required' => 'The product is required.',
+            'product_id.integer' => 'The product must be an integer.',
+            'product_id.exists' => 'The selected product does not exist.',
+            'quantity.required' => 'The quantity is required.',
+            'quantity.integer' => 'The quantity must be an integer.',
+            'quantity.min' => 'The quantity must be at least 0.',
         ];
     }
 }

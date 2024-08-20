@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'manage-category']);
         Permission::create(['name' => 'update-payment-status']);
         Permission::create(['name' => 'manage-location']);
+        Permission::create(['name' => 'manage-contact']);
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo(Permission::all());
         Permission::create(['name' => 'order']);

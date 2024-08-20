@@ -31,7 +31,12 @@ class Category extends Model
     }
 
     public static function getActiveCategories(){
-        $categories = Category::where('status', '1')->orderBy('rank');
+        $categories = Category::where('status', '1');
         return $categories;
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
     }
 }

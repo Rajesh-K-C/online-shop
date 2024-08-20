@@ -13,13 +13,15 @@
             {{-- <img src="{{asset('assets/frontend/img/logo.png')}}" alt="">--}}
         </a>
     </div>
-    <div class="humberger__menu__cart">
-        <ul>
-            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-        </ul>
-        <div class="header__cart__price">item: <span>$150.00</span></div>
-    </div>
+    @if(Auth::check() && Auth::user()->hasPermissionTo('order'))
+        <div class="humberger__menu__cart">
+            <ul>
+{{--                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>--}}
+                <li><a href="{{route('cart')}}"><i class="fa fa-shopping-bag"></i></a></li>
+            </ul>
+{{--            <div class="header__cart__price">item: <span>$150.00</span></div>--}}
+        </div>
+    @endif
     <div class="humberger__menu__widget">
         {{-- <div class="header__top__right__language">--}}
         {{-- <img src="{{asset('assets/frontend/img/language.png')}}" alt="">--}}
@@ -32,7 +34,13 @@
         {{-- </div>--}}
         <div class="header__top__right__auth">
             @auth
-                <a href="{{ route('home') }}"> Dashboard </a>
+                {{--                <a href="{{ route('home') }}"> Dashboard </a>--}}
+                <form action="{{route('logout')}}" style="display: inline-block" method="post">
+                    @csrf
+                    <button type="submit" title="Logout" style="margin: 0; padding: 0; outline: none; border: none;">
+                        Logout
+                    </button>
+                </form>
             @else
                 <a href="{{route('login')}}"><i class="fa fa-user"></i> Login</a>
             @endauth
@@ -40,18 +48,24 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">Pages</a>
-                <ul class="header__menu__dropdown">
-                    <li><a href="#">Shop Details</a></li>
-                    <li><a href="#">Shopping Cart</a></li>
-                    <li><a href="#">Check Out</a></li>
-                    <li><a href="#">Blog Details</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li class="active"><a href="{{route('index')}}">Home</a></li>
+            <li><a href="{{route('products')}}">Products</a></li>
+{{--            <li><a href="#">Pages</a>--}}
+{{--                <ul class="header__menu__dropdown">--}}
+{{--                    <li><a href="#">Shop Details</a></li>--}}
+{{--                    --}}{{--                    <li><a href="#">Shopping Cart</a></li>--}}
+{{--                    <li><a href="#">Check Out</a></li>--}}
+{{--                    <li><a href="#">Blog Details</a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
+            <li><a href="{{route('contact')}}">Contact</a></li>
+            @if(Auth::check())
+                @if(Auth::user()->hasRole('user'))
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                @else
+                    <li><a href="{{route('home')}}">Dashboard</a></li>
+                @endif
+            @endif
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -70,18 +84,14 @@
         @endif
         <!-- @if($data['setting']->instagram_link)
             <a href="{{$data['setting']->instagram_link }}" target="_break"><i class="fa fa-instagram"></i></a>
-
-
-
-
         @endif -->
         <!-- <a href="#"><i class="fa fa-linkedin"></i></a>
         <a href="#"><i class="fa fa-pinterest-p"></i></a> -->
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-            <li>Free Shipping for all Order of $99</li>
+            <li><i class="fa fa-envelope"></i> {{$data['setting']->email}}</li>
+{{--            <li>Free Shipping for all Order of $99</li>--}}
         </ul>
     </div>
 </div>
@@ -95,8 +105,8 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                            <li>Free Shipping for all Order of $99</li>
+                            <li><i class="fa fa-envelope"></i> {{$data['setting']->email}}</li>
+{{--                            <li>Free Shipping for all Order of $99</li>--}}
                         </ul>
                     </div>
                 </div>
@@ -131,14 +141,15 @@
                         {{-- </div>--}}
                         <div class="header__top__right__auth">
                             @auth
-                                <a href="{{ route('home') }}"> Dashboard </a>
+                                {{--                                <a href="{{ route('home') }}"> Dashboard </a>--}}
+                                <form action="{{route('logout')}}" style="display: inline-block" method="post">
+                                    @csrf
+                                    <button type="submit" title="Logout"
+                                            style="margin: 0; padding: 0; outline: none; border: none;">Logout
+                                    </button>
+                                </form>
                             @else
                                 <a href="{{route('login')}}"><i class="fa fa-user"></i> Login</a>
-                                {{--                                    @if (Route::has('register'))--}}
-                                {{--                                        <a href="{{ route('register') }}">--}}
-                                {{--                                            Register--}}
-                                {{--                                        </a>--}}
-                                {{--                                    @endif--}}
                             @endauth
                         </div>
                     </div>
@@ -159,30 +170,30 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="header__menu__dropdown">
-                                <li><a href="#">Shop Details</a></li>
-                                <li><a href="#">Shoping Cart</a></li>
-                                <li><a href="#">Check Out</a></li>
-                                <li><a href="#">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{route('index')}}">Home</a></li>
+                        <li><a href="{{route('products')}}">Products</a></li>
+                        <li><a href="{{route('contact')}}">Contact</a></li>
+                        @if(Auth::check())
+                            @if(Auth::user()->hasRole('user'))
+                                <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                            @else
+                                <li><a href="{{route('home')}}">Dashboard</a></li>
+                            @endif
+                        @endif
                     </ul>
                 </nav>
             </div>
-            <div class="col-lg-3">
-                <div class="header__cart">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                    </ul>
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+            @if(Auth::check() && Auth::user()->hasPermissionTo('order'))
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+{{--                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>--}}
+                            <li><a href="{{route('cart')}}"><i class="fa fa-shopping-bag"></i></a></li>
+                        </ul>
+{{--                        <div class="header__cart__price">item: <span>$150.00</span></div>--}}
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
         <div class="humberger__open">
             <i class="fa fa-bars"></i>

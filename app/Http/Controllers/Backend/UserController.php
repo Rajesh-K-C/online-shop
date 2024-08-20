@@ -23,10 +23,10 @@ class UserController extends Controller
 
     public function index()
     {
-        $data['records'] = $this->model->whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'user');
-        })->get();
-//        $data['records'] = $this->model->all();
+//        $data['records'] = $this->model->whereDoesntHave('roles', function ($query) {
+//            $query->where('name', 'user');
+//        })->get();
+        $data['records'] = $this->model->all();
         return view($this->base_view_folder . 'index', compact('data'));
     }
 

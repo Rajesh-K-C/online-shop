@@ -43,4 +43,9 @@ class Setting extends Model
     public function updatedBy(){
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function getActiveSetting()
+    {
+        return $this->where('status', 1)->first();
+    }
 }

@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @yield('meta')
 
-    <title>@yield('title')</title>
+    <title>@yield('title') | {{$data['setting']->website_name}}</title>
 
     <link rel="shortcut icon" href="{{asset('assets/images/setting/' . $data['setting']->favicon)}}" type="image/x-icon">
 

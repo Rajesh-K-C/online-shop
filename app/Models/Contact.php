@@ -5,17 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class State extends Model
+class Contact extends Model
 {
     use HasFactory;
 
-    protected $table = 'states';
+    protected $table = 'contacts';
     protected $fillable = [
         'name',
+        'email',
+        'user_id',
+        'contact',
     ];
 
-    public function districts()
+    public function user()
     {
-        return $this->hasMany(District::class);
+        return $this->belongsTo(User::class);
     }
 }

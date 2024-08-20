@@ -1528,7 +1528,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -14386,7 +14386,7 @@ var scale_time = core_scale.extend({
 		var time = options.time || (options.time = {});
 		var adapter = me._adapter = new core_adapters._date(options.adapters.date);
 
-		// DEPRECATIONS: output a message only one time per update
+		// DEPRECATIONS: output a contact only one time per update
 		deprecated$1('time scale', time.format, 'time.format', 'time.parser');
 		deprecated$1('time scale', time.min, 'time.min', 'ticks.min');
 		deprecated$1('time scale', time.max, 'time.max', 'ticks.max');

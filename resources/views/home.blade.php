@@ -1,3 +1,10 @@
+@php
+    if (Auth::user()->hasRole('user')) {
+        header('Location: ' . route('dashboard'));
+        exit();
+    }
+@endphp
+
 @extends('layouts.backend_master')
 
 @section('title', 'Admin Dashboard')

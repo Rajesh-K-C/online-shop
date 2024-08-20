@@ -96,7 +96,7 @@
     });
 
 
-    $('.hero__categories__all').on('click', function(){
+    $('.hero__categories__all').on('click', function () {
         $('.hero__categories ul').slideToggle(400);
     });
 
@@ -209,7 +209,11 @@
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
         if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
+            if (parseInt(proQty[0].children[1].getAttribute('max')) > oldValue) {
+                var newVal = parseFloat(oldValue) + 1;
+            }else {
+                return;
+            }
         } else {
             // Don't allow decrementing below zero
             if (oldValue > 0) {
@@ -218,7 +222,9 @@
                 newVal = 0;
             }
         }
-        $button.parent().find('input').val(newVal);
+        $('#quantity').val(newVal);
+        // console.log($('#quantity')[0].value);
+        // $button.parent().find('input').val(newVal);
     });
 
 })(jQuery);

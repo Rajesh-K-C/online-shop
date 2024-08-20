@@ -30,13 +30,32 @@ class Product extends Model
         'updated_by',
         'deleted_by',
     ];
-    public function getCategory(){
+
+    public function getCategory()
+    {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
-    public function getCreatedBy(){
+
+    public function getCreatedBy()
+    {
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
-    public function getUpdatedBy(){
+
+    public function getUpdatedBy()
+    {
         return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
+
+    public static function getActiveProducts()
+    {
+        return Product::where('status', 1)->orderBy('rank');
+    }
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

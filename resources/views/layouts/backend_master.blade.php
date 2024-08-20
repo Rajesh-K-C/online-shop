@@ -185,46 +185,72 @@
                 </div>
             </li>
         @endif
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item active">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-               aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
-            </a>
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="#">404 Page</a>
-                    <a class="collapse-item active" href="#">Blank Page</a>
-                </div>
-            </div>
-        </li>
+        @if(Auth::user()->hasPermissionTo('update-order-status'))
+            <!-- Nav Item - Users -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('backend.order.index')}}">
+                    <svg style="width: 20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                        <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path fill="#FFFFFF4D"
+                              d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                    </svg>
+                    <span>Orders</span>
+                </a>
+            </li>
+        @endif
+        @if(Auth::user()->hasPermissionTo('manage-contact'))
+            <!-- Nav Item - Users -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('backend.contact.index')}}">
+                    <svg style="width: 20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                        <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path fill="#FFFFFF4D"
+                              d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                    </svg>
+                    <span>Contact</span>
+                </a>
+            </li>
+        @endif
+{{--        <!-- Nav Item - Pages Collapse Menu -->--}}
+{{--        <li class="nav-item active">--}}
+{{--            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"--}}
+{{--               aria-controls="collapsePages">--}}
+{{--                <i class="fas fa-fw fa-folder"></i>--}}
+{{--                <span>Pages</span>--}}
+{{--            </a>--}}
+{{--            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"--}}
+{{--                 data-parent="#accordionSidebar">--}}
+{{--                <div class="bg-white py-2 collapse-inner rounded">--}}
+{{--                    <h6 class="collapse-header">Login Screens:</h6>--}}
+{{--                    <div class="collapse-divider"></div>--}}
+{{--                    <h6 class="collapse-header">Other Pages:</h6>--}}
+{{--                    <a class="collapse-item" href="#">404 Page</a>--}}
+{{--                    <a class="collapse-item active" href="#">Blank Page</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </li>--}}
 
-        <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
-        </li>
+{{--        <!-- Nav Item - Charts -->--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link" href="#">--}}
+{{--                <i class="fas fa-fw fa-chart-area"></i>--}}
+{{--                <span>Charts</span></a>--}}
+{{--        </li>--}}
 
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
-        </li>
+{{--        <!-- Nav Item - Tables -->--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link" href="#">--}}
+{{--                <i class="fas fa-fw fa-table"></i>--}}
+{{--                <span>Tables</span></a>--}}
+{{--        </li>--}}
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+{{--        <!-- Divider -->--}}
+{{--        <hr class="sidebar-divider d-none d-md-block">--}}
 
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+{{--        <!-- Sidebar Toggler (Sidebar) -->--}}
+{{--        <div class="text-center d-none d-md-inline">--}}
+{{--            <button class="rounded-circle border-0" id="sidebarToggle"></button>--}}
+{{--        </div>--}}
 
     </ul>
     <!-- End of Sidebar -->

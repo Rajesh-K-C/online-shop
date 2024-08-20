@@ -16,7 +16,11 @@ class District extends Model
         'state_id',
     ];
 
-    public function getState(){
+    public function state(){
         return $this->belongsTo(State::class, 'state_id');
     }
+    public function cities(){
+        return $this->hasMany(City::class, 'district_id');
+    }
+
 }
