@@ -15,14 +15,12 @@ class Product extends Model
     protected $fillable = [
         'name',
         'slug',
-        'short_description',
         'description',
         'price',
         'discount_amount',
-        'discount_percent',
+        'discount_percentage',
         'image',
         'stock',
-        'rank',
         'status',
         'total_sales',
         'category_id',
@@ -48,7 +46,7 @@ class Product extends Model
 
     public static function getActiveProducts()
     {
-        return Product::where('status', 1)->orderBy('rank');
+        return Product::where('status', 1);
     }
     public function carts()
     {

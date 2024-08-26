@@ -52,11 +52,7 @@
                     </tr>
                     <tr>
                         <th>Discount Percent</th>
-                        <td>{{$data['record']->discount_percent}}%</td>
-                    </tr>
-                    <tr>
-                        <th>Rank</th>
-                        <td>{{$data['record']->rank}}</td>
+                        <td>{{$data['record']->discount_percentage}}%</td>
                     </tr>
                     <tr>
                         <th>Stock</th>
@@ -76,10 +72,6 @@
                             <img src="{{asset('assets/images/product/'.$data['record']->image)}}"
                                  class="image-preview preview-block" alt="Image">
                         </td>
-                    </tr>
-                    <tr>
-                        <th>Short Description</th>
-                        <td> {{$data['record']->short_description}} </td>
                     </tr>
                     <tr>
                         <th>Description</th>

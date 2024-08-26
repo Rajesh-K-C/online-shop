@@ -23,7 +23,7 @@
                     <tr>
                         <th>SN</th>
                         <th>Name</th>
-                        <th>Rank</th>
+                        <th>Price</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -33,7 +33,7 @@
                         <tr>
                             <td>{{$loop->index + 1}}</td>
                             <td>{{ $record->name }}</td>
-                            <td>{{ $record->rank }}</td>
+                            <td>{{ $record->price }}</td>
                             <td>
                                 @include('components/display_status_message', ['status' => $record->status])
                             </td>

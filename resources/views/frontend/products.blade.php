@@ -27,10 +27,9 @@
                                 </div>
                                 <div class="product__discount__item__text">
                                     <h5><a href="#">{{$product->name}}</a></h5>
-                                    <span>{{truncateText($product->short_description)}}</span>
-                                    @if($product->discount_percent > 0)
+                                    @if($product->discount_percentage > 0)
                                         <div class="product__item__price">
-                                            Rs. {{formatFloat(($product->price/100) * (100 - $product->discount_percent))}}
+                                            Rs. {{formatFloat(($product->price/100) * (100 - $product->discount_percentage))}}
                                             <span>Rs. {{formatFloat($product->price)}}
                                         </span>
                                         </div>

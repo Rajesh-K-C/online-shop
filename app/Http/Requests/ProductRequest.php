@@ -31,7 +31,7 @@ class ProductRequest extends FormRequest
             ];
         $image_rule = 'image|mimes:jpeg,png,jpg,gif|max:2048';
         if ($id = $this->route('product')) {
-            $name_rule .= ',' . $id;
+            $name_rule .= ",{$id}";
             $slug_rule[] = 'unique:products,slug,' . $id;
 //            $slug_rule .= ',' . $id;
             $image_rule .= '|nullable';
@@ -43,19 +43,19 @@ class ProductRequest extends FormRequest
         return [
             'name' => $name_rule,
             'slug' => $slug_rule,
-            'short_description' => 'required|string|max:255',
+            // 'short_description' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
             'price' => [
                 'required',
                 'regex:/^\d{2,8}(\.\d{1,2}0*)?$/',
             ],
-            'discount_percent' => [
+            'discount_percentage' => [
                 'required',
                 'regex:/^\d{1,2}(\.\d{1,2}0*)?$/',
             ],
             'image_file' => $image_rule,
             'stock' => 'required|integer|min:0|max:200',
-            'rank' => 'required|integer|min:0',
+            // 'rank' => 'required|integer|min:0',
             'status' => 'required|integer|between:0,1',
             'category' => 'required|integer|exists:categories,id',
         ];

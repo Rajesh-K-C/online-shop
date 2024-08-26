@@ -37,7 +37,7 @@ class ProductController extends Controller
     public function create()
     {
         $data['records'] = Category::all();
-        return view($this->base_view_folder . 'create', compact('data'));
+        return view("{$this->base_view_folder}create", compact('data'));
     }
 
     /**

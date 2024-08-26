@@ -19,15 +19,15 @@ return new class extends Migration
             $table->string('image');
             $table->boolean('status')->default(0);
             $table->integer('total_sales')->default(0);
-            $table->foreignId('category_id')->constrained();
-            $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->unsignedBigInteger('deleted_by')->nullable();
+            $table->foreignId('category_id')->constrained();$table->decimal('price'); // default 8, 2
+            $table->decimal('discount_amount')->default(0);
+            $table->decimal('discount_percentage', 4)->default(0);
+            $table->integer('stock')->default(0);
+            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign('created_by')->references('id')->on('users');
-            $table->foreign('updated_by')->references('id')->on('users');
-            $table->foreign('deleted_by')->references('id')->on('users');
         });
     }
 

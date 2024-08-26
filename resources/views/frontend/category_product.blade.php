@@ -8,15 +8,15 @@
         <section class="categories">
             <h1 class="h3 mb-4 text-center text-gray-800">Category: {{$data['category']->name}}</h1>
             <div class="row">
-                @forelse($data['records'] as $record)
-                    <a href="{{route('product', $record->slug)}}">
+                @forelse($data['products'] as $product)
+                    <a href="{{route('product', $product->slug)}}">
                         <div class="col-lg-4">
                             <div class="product__discount__item">
                                 <div class="product__discount__item__pic set-bg"
-                                     data-setbg="{{asset('assets/images/product/'. $record->image)}}">
-                                    @if($record->discount_percent > 0)
+                                     data-setbg="{{asset('assets/images/product/'. $product->image)}}">
+                                    @if($product->discount_percentage > 0)
                                         <div class="product__discount__percent">
-                                            -{{formatFloat($record->discount_percent)}}%
+                                            -{{formatFloat($product->discount_percentage)}}%
                                         </div>
                                     @endif
                                     {{--                                    <ul class="product__item__pic__hover">--}}
@@ -26,16 +26,15 @@
                                     {{--                                    </ul>--}}
                                 </div>
                                 <div class="product__discount__item__text">
-                                    <h5><a href="#">{{$record->name}}</a></h5>
-                                    <span>{{truncateText($record->short_description)}}</span>
-                                    @if($record->discount_percent > 0)
-                                        <div class="product__item__price">
-                                            Rs. {{formatFloat(($record->price/100) * (100 - $record->discount_percent))}}
-                                            <span>Rs. {{formatFloat($record->price)}}
+                                    <h5><a href="#">{{$product->name}}</a></h5>
+                                    @if($product->discount_percentage > 0)
+                                        <div class="product__item__price">                
+                                            Rs. {{formatFloat(($product->price/100) * (100 - $product->discount_percentage))}}
+                                            <span>Rs. {{formatFloat($product->price)}}
                                         </span>
                                         </div>
                                     @else
-                                        <div class="product__item__price">Rs. {{formatFloat($record->price)}}</div>
+                                        <div class="product__item__price">Rs. {{formatFloat($product->price)}}</div>
                                     @endif
                                 </div>
                             </div>

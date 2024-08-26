@@ -54,18 +54,11 @@
                         @include('components.form_element_error', ['field'=> 'price'])
                     </div>
                     <div class="form-group">
-                        <label for="discount_percent">Discount Percent</label>
-                        <input type="text" name="discount_percent" id="discount_percent" class="form-control"
-                               value="{{ $data['record']->discount_percent }}"
+                        <label for="discount_percentage">Discount Percentange</label>
+                        <input type="text" name="discount_percentage" id="discount_percentage" class="form-control"
+                               value="{{ $data['record']->discount_percentage }}"
                                placeholder="Enter discount percent">
-                        @include('components.form_element_error', ['field'=> 'discount_percent'])
-                    </div>
-                    <div class="form-group">
-                        <label for="rank">Rank</label>
-                        <input type="number" name="rank" id="rank" class="form-control"
-                               value="{{ $data['record']->rank }}"
-                               placeholder="Enter rank">
-                        @include('components.form_element_error', ['field'=> 'rank'])
+                        @include('components.form_element_error', ['field'=> 'discount_percentage'])
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock</label>
@@ -103,12 +96,7 @@
                              class="image-preview preview-block" id="image_file_preview" alt="">
                         @include('components.form_element_error', ['field'=> 'image_file'])
                     </div>
-                    <div class="form-group">
-                        <label for="short_description">Short Description</label>
-                        <input type="text" name="short_description" id="short_description" class="form-control"
-                               placeholder="Enter short description" value="{{ $data['record']->short_description }}">
-                        @include('components.form_element_error', ['field'=> 'short_description'])
-                    </div>
+                    
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea type="text" name="description" id="description" class="form-control"

@@ -13,6 +13,7 @@ use App\Models\District;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\State;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,7 @@ class FrontendController extends Controller
         $data['setting'] = $this->setting->getActiveSetting();
         $data['categories'] = $this->category->getActiveCategories()->orderBy('name')->get();
         $data['popular-categories'] = $this->category->getActiveCategories()->orderBy('rank')->limit(5)->get();
-//        dd($data);
+        //    dd($data);
         return view('frontend.index', compact('data'));
     }
 
@@ -56,9 +57,9 @@ class FrontendController extends Controller
             \request()->session()->flash('error', 'Category Not Found');
             return redirect(route('index'));
         }
-        $data['records'] = Product::getActiveProducts()->where('category_id', $id)->get();
+        $data['products'] = Product::getActiveProducts()->where('category_id', $id)->get();
         $data['setting'] = Setting::where('status', 1)->first();
-//        dd($data['records']);
+        // dd($data);
         return view('frontend.category_product', compact('data'));
     }
 
@@ -70,17 +71,17 @@ class FrontendController extends Controller
             return redirect(route('index'));
         }
         $data['setting'] = $this->setting->getActiveSetting();
-//        dd($data['records']);
+        //        dd($data['records']);
         return view('frontend.product', compact('data'));
     }
 
     public function cart()
     {
-//        $user = Auth::user();
+        //        $user = Auth::user();
         $data['carts'] = Auth::user()->carts;
-//        dd($data['carts'][0]);
+        //        dd($data['carts'][0]);
         $data['setting'] = $this->setting->getActiveSetting();
-//        dd($data);
+        //        dd($data);
         return view('frontend.cart', compact('data'));
     }
 
@@ -129,7 +130,7 @@ class FrontendController extends Controller
     public function contact()
     {
         $data['setting'] = $this->setting->getActiveSetting();
-        return view('frontend.contact', compact('data'));
+        return view('frontend.contact');
     }
 
     public function contactStore(ContactRequest $request)
