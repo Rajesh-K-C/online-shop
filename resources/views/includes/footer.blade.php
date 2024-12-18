@@ -6,24 +6,24 @@
                 <div class="footer__about">
                     <div class="footer__about__logo">
                         <a href="{{route('index')}}">
-                            @if($data['setting']->footer_logo)
+                            @if($setting->footer_logo)
                                 <img style="max-height: min(10rem, 100%); max-width: min(10rem, 100%);"
-                                     src="{{asset('assets/images/setting/'.$data['setting']->footer_logo)}}" alt="">
+                                     src="{{asset('assets/images/setting/'.$setting->footer_logo)}}" alt="">
                             @else
                                 <img style="max-height: min(10rem, 100%); max-width: min(10rem, 100%);"
-                                     src="{{asset('assets/images/setting/'.$data['setting']->logo)}}" alt="">
+                                     src="{{asset('assets/images/setting/'.$setting->logo)}}" alt="">
                             @endif
                         </a>
                     </div>
                     <ul>
-                        <li>Address: {{$data['setting']->address}}</li>
-                        @if($data['setting']->phone_optional)
-                            <li>Phone 1: {{$data['setting']->phone}}</li>
-                            <li>Phone 2: {{$data['setting']->phone_optional}}</li>
+                        <li>Address: {{$setting->address}}</li>
+                        @if($setting->phone_optional)
+                            <li>Phone 1: {{$setting->phone}}</li>
+                            <li>Phone 2: {{$setting->phone_optional}}</li>
                         @else
-                            <li>Phone: {{$data['setting']->phone}}</li>
+                            <li>Phone: {{$setting->phone}}</li>
                         @endif
-                        <li>Email: {{$data['setting']->email}}</li>
+                        <li>Email: {{$setting->email}}</li>
                     </ul>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                         <li><a href="{{route('contact')}}">Contact</a></li>
                         @if(Auth::check())
                             @if(Auth::user()->hasRole('user'))
-                                <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                                <li><a href="{{route('profile')}}">Profile</a></li>
                                 <li><a href="{{route('cart')}}">Cart</a></li>
                             @else
                                 <li><a href="{{route('home')}}">Dashboard</a></li>

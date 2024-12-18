@@ -22,7 +22,7 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         $name_rule = 'required|string|max:30|unique:categories,name';
-        $image_rule = 'image|mimes:jpeg,png,jpg,gif|max:2048';
+        $image_rule = 'image|mimes:jpeg,png,jpg,gif,webp|max:2048';
         if ($id = $this->route('category')) {
             $name_rule .= ',' . $id;
             $image_rule .= '|nullable';

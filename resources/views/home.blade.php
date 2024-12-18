@@ -1,8 +1,12 @@
 @php
     if (Auth::user()->hasRole('user')) {
-        header('Location: ' . route('dashboard'));
+        header('Location: ' . route('profile'));
         exit();
     }
+    
+    header('Location: ' . route('backend.dashboard'));
+    exit()
+    // DB::table('/')
 @endphp
 
 @extends('layouts.backend_master')

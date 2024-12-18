@@ -30,7 +30,7 @@
                     @forelse($data['records'] as $record)
                         <tr>
                             <td>{{$loop->index + 1}}</td>
-                            <td>{{ $record->getState->name }}</td>
+                            <td>{{ $record->state->name }}</td>
                             <td>{{ $record->name }}</td>
                             <td>
                                 <!-- <a href="{{route('backend.district.show', $record->id)}}"

@@ -28,14 +28,14 @@
                     @forelse($data['records'] as $record)
                         <tr>
                             <td>{{$loop->index + 1}}</td>
-                            <td>{{ $record->name?$record->name:$record->user->name }}</td>
-                            <td>{{ $record->email?$record->email:$record->user->email }}</td>
+                            <td>{{ $record->name?:$record->user->name }}</td>
+                            <td>{{ $record->email?:$record->user->email }}</td>
                             <td>{{ $record->message }}</td>
                             <td>
 {{--                                <a href="{{route('backend.product.show', $record->id)}}"--}}
 {{--                                   class="btn btn-primary mr-1">View</a>--}}
                                 <form style="display: inline-block"
-                                      action="{{route('backend.product.destroy', $record->id)}}" method="post">
+                                      action="{{route('backend.contact.destroy', $record->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="_method" value="DELETE"/>

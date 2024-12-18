@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->foreignId('user_id')->nullable()->constrained();
-            $table->string('contact', 1000);
+            $table->string('message', 1000);
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class City extends Model
         'updated_by',
     ];
 
-    public function getDistrict(){
+    public function district(){
         return $this->belongsTo(District::class, 'district_id');
     }
 

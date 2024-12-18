@@ -20,4 +20,14 @@ class Order extends Model
         'updated_by',
         'delivery_agent',
     ];
+
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

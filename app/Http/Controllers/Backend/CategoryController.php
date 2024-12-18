@@ -46,7 +46,7 @@ class CategoryController extends Controller
         $request->request->add(['created_by' => Auth::user()->id]);
         if ($request->hasFile('image_file')) {
             $image_file = $request->file('image_file');
-            $filename = time()  .'_'. Auth::user()->id . '.' . $image_file->getClientOriginalExtension();
+            $filename = time() . '_' . Auth::user()->id . '.' . $image_file->getClientOriginalExtension();
             $image_file->move($this->base_image_folder, $filename);
             $request->request->add(['image' => $filename]);
         }
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     {
         $data['record'] = $this->model->find($id);
         if ($data['record'] == null) {
-//            abort(404);
+            //            abort(404);
             \request()->session()->flash('error', $this->model_name . ' Not Found');
             return redirect(route($this->base_route . 'index'));
         }
@@ -99,10 +99,12 @@ class CategoryController extends Controller
         }
         if ($request->hasFile('image_file')) {
             $image_file = $request->file('image_file');
-            $filename = time() .'_'. Auth::user()->id .  '.' . $image_file->getClientOriginalExtension();
+            $filename = time() . '_' . Auth::user()->id . '.' . $image_file->getClientOriginalExtension();
             $image_file->move(public_path($this->base_image_folder), $filename);
             $request->request->add(['image' => $filename]);
-            unlink(public_path($this->base_image_folder . '/' . $data['record']->image));
+            if (file_exists(public_path($this->base_image_folder . '/' . $data['record']->image))) {
+                unlink(public_path($this->base_image_folder . '/' . $data['record']->image));
+            }
         }
 
         $request->request->add(['updated_by' => auth()->user()->id]);
@@ -112,7 +114,7 @@ class CategoryController extends Controller
             return redirect(route($this->base_route . 'index'));
         } else {
             $request->session()->flash('error', $this->model_name . ' Update Failed');
-            return redirect(route($this->base_route .'edit'));
+            return redirect(route($this->base_route . 'edit'));
         }
     }
 
@@ -143,7 +145,7 @@ class CategoryController extends Controller
 
     public function restore($id)
     {
-//        $data['record'] = $this->>$this->model->onlyTrashed()->find($id);
+        //        $data['record'] = $this->>$this->model->onlyTrashed()->find($id);
         $data['record'] = $this->model->where('id', $id)->onlyTrashed()->first();
         if ($data['record']->restore()) {
             \request()->session()->flash('success', $this->model_name . ' Restored Successfully');

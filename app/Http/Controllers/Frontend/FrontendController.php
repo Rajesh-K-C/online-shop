@@ -5,15 +5,19 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartRequest;
 use App\Http\Requests\ContactRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Contact;
 use App\Models\District;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\State;
 use App\Models\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,13 +45,16 @@ class FrontendController extends Controller
         return view('frontend.index', compact('data'));
     }
 
-    public function dashboard()
+    public function profile()
     {
         $data['setting'] = $this->setting->getActiveSetting();
         $data['states'] = State::all();
         $data['districts'] = District::all();
         $data['cities'] = City::all();
-        return view('frontend.dashboard', compact('data'));
+        // dd(Auth()->user()->id);
+        // dd($data['orders']);
+        // dd(Order::get());
+        return view('frontend.profile', compact('data'));
     }
 
     public function categoryProducts(string $id)
@@ -124,13 +131,14 @@ class FrontendController extends Controller
 
     public function order(Request $request)
     {
-
+        $data['orders'] = Order::get()->where('user_id', Auth()->user()->id);
+        return view('frontend.orders', compact('data'));
     }
 
     public function contact()
     {
         $data['setting'] = $this->setting->getActiveSetting();
-        return view('frontend.contact');
+        return view('frontend.contact', compact('data'));
     }
 
     public function contactStore(ContactRequest $request)
@@ -147,18 +155,32 @@ class FrontendController extends Controller
         return redirect()->back();
     }
 
-    public function userUpdate(Request $request, $id)
+    public function userUpdate(UpdateUserRequest $request, $id)
     {
+        $user = User::find($id);
+        if ($user->address === null) {
+            // dd($request->city);
+            $address = Address::create([
+                'address' => $request->address,
+                "city_id" => $request->city,
+            ]);
+            $request->request->add([
+                "address_id" => $address->id,
+            ]);
+        } else {
+            $address = Address::find($user->address_id);
+            if (
+                !$address->update([
+                    "address" => $request->address,
+                    "city_id" => $request->city,
+                ])
+            ) {
+                $request->session()->flash('error', 'User Update Failed');
+                return redirect()->back();
+            }
+        }
 
-        $data['record'] = User::find($id);
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-        ]);
-
-        if ($data['record']->update($request->all())) {
+        if ($user->update($request->all())) {
             $request->session()->flash('success', 'User Updated Successfully');
             return redirect()->back();
         } else {
@@ -173,4 +195,16 @@ class FrontendController extends Controller
         $data['setting'] = Setting::where('status', 1)->first();
         return view('frontend.products', compact('data'));
     }
+    public function search(Request $request)
+    {
+        $request->validate([
+            "query" => 'required|min:1'
+        ]);
+        $data['query'] = $request['query'];
+        $data['products'] = Product::where('name', 'like', "%{$request['query']}%")
+            ->get();
+        $data['setting'] = Setting::where('status', 1)->first();
+        return view('frontend.search', compact('data'));
+    }
+
 }

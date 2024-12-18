@@ -26,7 +26,7 @@
                         @include('components.form_element_error', ['field'=> 'name'])
                     </div>
                     <div class="form-group">
-                        <label for="state" class="form-label">District</label>
+                        <label for="state" class="form-label">State</label>
                         <select type="text" name="state" id="state" class="form-control">
                             <option value="">Select State</option>
                             @foreach($data['records'] as $record)

@@ -21,15 +21,15 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $name_rule = 'required|string|max:30|unique:products,name';
+        $name_rule = 'required|string|max:255|unique:products,name';
 //        $slug_rule = 'required|string|max:30|unique:products,slug';
         $slug_rule = [
             'required',
             'string',
-            'max:30',
+            'max:255',
             'regex:/^\S*$/',
             ];
-        $image_rule = 'image|mimes:jpeg,png,jpg,gif|max:2048';
+        $image_rule = 'image|mimes:jpeg,png,jpg,gif,webp|max:2048';
         if ($id = $this->route('product')) {
             $name_rule .= ",{$id}";
             $slug_rule[] = 'unique:products,slug,' . $id;

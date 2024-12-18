@@ -35,11 +35,11 @@
                     </tr>
                     <tr>
                         <th>State</th>
-                        <td>{{$data['record']->getDistrict->getState->name}}</td>
+                        <td>{{$data['record']->district->state->name}}</td>
                     </tr>
                     <tr>
                         <th>District</th>
-                        <td>{{$data['record']->getDistrict->name}}</td>
+                        <td>{{$data['record']->district->name}}</td>
                     </tr>
                     <tr>
                         <th>City Name</th>

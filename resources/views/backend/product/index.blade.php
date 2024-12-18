@@ -38,6 +38,8 @@
                                 @include('components/display_status_message', ['status' => $record->status])
                             </td>
                             <td>
+                                <a href="{{route('product', $record->slug)}}"
+                                   class="btn btn-primary mr-1">Preview</a>
                                 <a href="{{route('backend.product.show', $record->id)}}"
                                    class="btn btn-primary mr-1">View</a>
                                 <a href="{{ route('backend.product.edit', $record->id) }}"

@@ -10,9 +10,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @yield('meta')
 
-    <title>@yield('title') | {{$data['setting']->website_name}}</title>
+    <title>@yield('title') | {{$setting->website_name}}</title>
 
-    <link rel="shortcut icon" href="{{asset('assets/images/setting/' . $data['setting']->favicon)}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/setting/' . $setting->favicon)}}" type="image/x-icon">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -26,7 +26,8 @@
     <link rel="stylesheet" href="{{asset('assets/frontend/css/owl.carousel.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}" type="text/css">
-
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head> -->
     @yield('css')
 </head>
 

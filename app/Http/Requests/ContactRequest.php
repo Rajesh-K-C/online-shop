@@ -29,14 +29,14 @@ class ContactRequest extends FormRequest
             $name_rule .= '|nullable';
             $email_rule .= '|nullable';
         } else {
-            $name_rule .= '|required';
-            $email_rule .= '|required';
+            $name_rule = 'required|' . $name_rule;
+            $email_rule = 'required|' . $email_rule;
         }
 
         return [
-            'name'=>$name_rule,
-            'email'=>$email_rule,
-            'contact'=>'required|string|min:10|max:1000',
+            'name' => $name_rule,
+            'email' => $email_rule,
+            'message' => 'required|string|min:10|max:1000',
         ];
     }
 }

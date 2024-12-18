@@ -1,36 +1,48 @@
 <?php
 
+use App\Http\Controllers\backend\ReportController;
+use App\Http\Middleware\SettingMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\ContactController;
 
-Auth::routes();
+Route::middleware(SettingMiddleware::class)->group(function () {
+    Auth::routes();
 
-// Open Routes
-Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('index');
-Route::get('category/{category}/product', [App\Http\Controllers\Frontend\FrontendController::class, 'categoryProducts'])->name('category.product');
-Route::get('product/{slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'product'])->name('product');
-Route::get('contact', [App\Http\Controllers\Frontend\FrontendController::class, 'contact'])->name('contact');
-Route::post('contact', [App\Http\Controllers\Frontend\FrontendController::class, 'contactStore'])->name('contact');
-Route::get('products', [App\Http\Controllers\Frontend\FrontendController::class, 'products'])->name('products');
+    // Open Routes
+    Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [FrontendController::class, 'index'])->name('index');
+    Route::get('category/{category}/product', [FrontendController::class, 'categoryProducts'])->name('category.product');
+    Route::get('product/{slug}', [FrontendController::class, 'product'])->name('product');
+    // Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
+    // Route::post('contact', [FrontendController::class, 'contactStore'])->name('contact');
+    Route::post('contact', [ContactController::class, 'store'])->name('contact');
+    Route::get('contact', [ContactController::class, 'create'])->name('contact');
+    Route::get('products', [FrontendController::class, 'products'])->name('products');
+    Route::post('search', [FrontendController::class, 'search'])->name('search');
 
-// Normal User Routes
-Route::group(['middleware' => ['role:user']], function () {
-    Route::get('/dashboard', [App\Http\Controllers\Frontend\FrontendController::class, 'dashboard'])->name('dashboard');
-    Route::get('/shopping-cart', [App\Http\Controllers\Frontend\FrontendController::class, 'cart'])->name('cart');
-    Route::post('/add-to-cart', [App\Http\Controllers\Frontend\FrontendController::class, 'addToCart'])->name('add-to-cart');
-    Route::delete('/delete-cart/{cart}', [App\Http\Controllers\Frontend\FrontendController::class, 'deleteCart'])->name('delete-cart');
-    Route::post('/carts/update', [App\Http\Controllers\Frontend\CartController::class, 'updateCarts'])->name('carts.update');
-    Route::post('/cart/update-quantity', [App\Http\Controllers\Frontend\CartController::class, 'updateQuantity'])->name('cart.update.quantity');
-    Route::post('/order/create', [App\Http\Controllers\Frontend\OrderController::class, 'createOrder'])->name('order.create');
-    Route::get('/order/success/{order}', [App\Http\Controllers\Frontend\OrderController::class, 'orderSuccess'])->name('order.success');
-    Route::put('user/update/{user}', [App\Http\Controllers\Frontend\FrontendController::class, 'userUpdate'])->name('user.update');
+    // Normal User Routes
+    Route::group(['middleware' => ['auth', 'role:user']], function () {
+        Route::get('/profile', [FrontendController::class, 'profile'])->name('profile');
+        Route::put('user/{user}', action: [FrontendController::class, 'userUpdate'])->name('profile.update');
+        Route::get('/shopping-cart', [FrontendController::class, 'cart'])->name('cart');
+        Route::post('/add-to-cart', [FrontendController::class, 'addToCart'])->name('add-to-cart');
+        Route::delete('/delete-cart/{cart}', [FrontendController::class, 'deleteCart'])->name('delete-cart');
+        Route::post('/carts/update', [App\Http\Controllers\Frontend\CartController::class, 'updateCarts'])->name('carts.update');
+        Route::post('/cart/update-quantity', [App\Http\Controllers\Frontend\CartController::class, 'updateQuantity'])->name('cart.update.quantity');
+        Route::get('/order', [FrontendController::class, 'order'])->name('order');
+        Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+        Route::get('/order/{order}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.show');
+        Route::get('/payment-failed', [App\Http\Controllers\OrderController::class, 'payment_failed'])->name('payment.failed');
+        Route::get('/payment-success', [App\Http\Controllers\OrderController::class, 'payment_success'])->name('payment.success');
+    });
 });
 
 // These Routes are accessible after login
 Route::middleware('auth')->group(function () {
-
     // Add Prefix on route name and route url
     Route::prefix('backend')->name('backend.')->group(function () {
 
@@ -38,7 +50,7 @@ Route::middleware('auth')->group(function () {
         Route::group(['middleware' => ['role:admin']], function () {
             // User Routes
             Route::resource('user', App\Http\Controllers\Backend\UserController::class);
-//            Route::get('/user/search', [App\Http\Controllers\Backend\UserController::class, 'search'])->name('user.search');
+            //            Route::get('/user/search', [App\Http\Controllers\Backend\UserController::class, 'search'])->name('user.search');
             // Permission Routes
             Route::resource('permission', App\Http\Controllers\Backend\PermissionController::class);
             // Role Routes
@@ -59,6 +71,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/product/{product}/restore', [App\Http\Controllers\Backend\ProductController::class, 'restore'])->name('product.restore');
             Route::delete('/product/{product}/remove', [App\Http\Controllers\Backend\ProductController::class, 'remove'])->name('product.remove');
 
+            Route::get('/dashboard', [ReportController::class, 'index'])->name('dashboard');
+            Route::get('/report/orders', [ReportController::class, 'getOrderReport']);
         });
 
         // Setting Routes
@@ -81,7 +95,12 @@ Route::middleware('auth')->group(function () {
         });
         // Order Routes
         Route::group(['middleware' => ['permission:update-order-status']], function () {
-            Route::resource('order', App\Http\Controllers\Backend\ProductController::class);
+            // Route::resource('order', App\Http\Controllers\Backend\ProductController::class);
+            Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+            Route::get('/order/{order}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.show');
+            Route::get('/order/{order}/edit', [App\Http\Controllers\OrderController::class, 'edit'])->name('order.edit');
+            Route::put('/order/{order}', [App\Http\Controllers\OrderController::class, 'update'])->name('order.update');
+            Route::delete('/order/{order}', [App\Http\Controllers\OrderController::class, 'destroy'])->name('order.destroy');
         });
         // Message Routes
         Route::group(['middleware' => ['permission:manage-contact']], function () {

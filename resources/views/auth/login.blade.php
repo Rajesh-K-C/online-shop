@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+@extends('layouts.base')
 
-    <title>Login</title>
+@section('title', "Login")
 
-    <!-- Custom fonts for this template-->
-    <link href="{{asset('assets/backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+@section('css')
 
-    <!-- Custom styles for this template-->
-    <link href="{{asset('assets/backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
+<!-- Custom fonts for this template-->
+<!-- <link href="{{asset('assets/backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css"> -->
+<!-- <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet"> -->
 
-</head>
+<!-- Custom styles for this template-->
+<link href="{{asset('assets/backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
-<body class="bg-gradient-primary">
+@endsection
+
+@section('content')
 
 <div class="container">
 
@@ -43,26 +38,27 @@
                                     @csrf
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
-                                               id="exampleInputEmail" aria-describedby="emailHelp"
-                                               placeholder="Enter Email" name="email"  value="{{ old('email') }}">
+                                            id="exampleInputEmail" aria-describedby="emailHelp"
+                                            placeholder="Enter Email" name="email" value="{{ old('email') }}">
                                         @error('email')
                                             <span class="text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                                <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Password" name="password">
+                                            id="exampleInputPassword" placeholder="Password" name="password">
                                         @error('password')
-                                        <span class="text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck" name="remember"  {{ old('remember') ? 'checked' : '' }}>
+                                            <input type="checkbox" class="custom-control-input" id="customCheck"
+                                                name="remember" {{ old('remember') ? 'checked' : '' }}>
                                             <label class="custom-control-label" for="customCheck">Remember
                                                 Me</label>
                                         </div>
@@ -71,18 +67,8 @@
                                         {{ __('Login') }}
                                     </button>
 
-                                    <hr>
-                                    <a href="#" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
-                                    <a href="#" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                    </a>
                                 </form>
                                 <hr>
-                                <div class="text-center">
-                                    <a class="small" href="#">Forgot Password?</a>
-                                </div>
                                 <div class="text-center">
                                     <a class="small" href="{{route('register')}}">Create an Account!</a>
                                 </div>
@@ -98,16 +84,4 @@
 
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="{{asset('assets/backend/vendor/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('assets/backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="{{asset('assets/backend/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="{{asset('assets/backend/js/sb-admin-2.min.js')}}"></script>
-
-</body>
-
-</html>
+@endsection

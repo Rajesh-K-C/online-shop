@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('image');
             $table->boolean('status')->default(0);
             $table->integer('total_sales')->default(0);
-            $table->foreignId('category_id')->constrained();$table->decimal('price'); // default 8, 2
+            $table->foreignId('category_id')->constrained();
+            $table->decimal('price'); // default 8, 2
             $table->decimal('discount_amount')->default(0);
             $table->decimal('discount_percentage', 4)->default(0);
             $table->integer('stock')->default(0);

@@ -108,7 +108,9 @@ class ProductController extends Controller
             $filename = time() . '_' . Auth::user()->id . '.' . $image_file->getClientOriginalExtension();
             $image_file->move(public_path($this->base_image_folder), $filename);
             $request->request->add(['image' => $filename]);
-            unlink(public_path($this->base_image_folder . '/' . $data['record']->image));
+            if (file_exists(public_path($this->base_image_folder . '/' . $data['record']->image))) {
+                unlink(public_path($this->base_image_folder . '/' . $data['record']->image));
+            }
         }
         $request->request->add([
             'updated_by' => Auth::user()->id,

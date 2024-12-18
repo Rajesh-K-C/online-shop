@@ -6,7 +6,7 @@
     <div class="container">
         <!-- Categories Section Begin -->
         <section class="categories">
-            <h1 class="h3 mb-4 text-center text-gray-800">Products</h1>
+            <h1 class="h3 mb-4 text-center text-gray-800">Search Result: {{ $data['query'] }}</h1>
             <div class="row">
                 @forelse($data['products'] as $product)
                     <a href="{{route('product', $product->slug)}}">

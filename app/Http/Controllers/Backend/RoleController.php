@@ -124,7 +124,7 @@ class RoleController extends Controller
         }
         if ($record) {
             if ($data['record']->syncPermissions($request->permission)) {
-                $request->session()->flash('success', $this->model_name . ' Created Successfully');
+                $request->session()->flash('success', $this->model_name . ' Update Successfully');
                 return redirect(route($this->base_route . 'index'));
             }
             $request->session()->flash('error', 'Permissions Update Failed');
