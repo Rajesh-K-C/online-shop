@@ -46,18 +46,23 @@ class OrderController extends Controller
     }
     public function payment_failed(Request $request)
     {
-        $id = substr($request->input('oid'), 2);
+        $data = $request->input('data');
+        $s = json_decode(base64_decode($data));
+        $id = substr($s->transaction_uuid,2);
         if (!$id) {
             return redirect()->route('cart', $id)->with('error', 'Payment failed!');
         }
 
         OrderProduct::where('order_id', $id)->delete();
         Order::find($id)->delete();
+        dd();
         return view('frontend.payment_failed');
     }
     public function payment_success(Request $request)
     {
-        $id = substr($request->input('oid'), 2);
+        $data = $request->input('data');
+        $s = json_decode(base64_decode($data));
+        $id = substr($s->transaction_uuid,2);
         if (!$id) {
             return redirect()->route('cart', $id)->with('error', 'Payment failed!');
         }
@@ -177,8 +182,10 @@ class OrderController extends Controller
 
             // Commit transaction
             DB::commit();
-            $orderData = ["id" => $order->id, 'amount' => $order->grand_total];
-
+            $msg = "total_amount=$order->grand_total,transaction_uuid=MP$order->id,product_code=EPAYTEST";
+            $s = hash_hmac('sha256', $msg, '8gBm/:&EnhH.1/q', true);
+            $hash = base64_encode($s);
+            $orderData = ["id" => $order->id, 'amount' => $order->grand_total, 'hash' => $hash];
             return view('frontend.payment', compact('orderData'));
         } catch (\Exception $e) {
             // Rollback transaction if something goes wrong

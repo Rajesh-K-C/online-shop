@@ -33,13 +33,13 @@
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
-                        @if ($data['setting']->phone)
+                        @if ($setting->phone)
                             <div class="hero__search__phone">
                                 <div class="hero__search__phone__icon">
                                     <i class="fa fa-phone"></i>
                                 </div>
                                 <div class="hero__search__phone__text">
-                                    <h5>{{$data['setting']->phone}}</h5>
+                                    <h5>{{$setting->phone}}</h5>
                                     <span>support 24/7 time</span>
                                 </div>
                             </div>

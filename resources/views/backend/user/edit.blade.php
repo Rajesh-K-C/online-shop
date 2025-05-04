@@ -31,9 +31,9 @@
                         <p><b>Phone Number:</b> {{ $data['record']->phone}}</p>
                     </div>
                     <div class="form-group">
-                        <p><b>Address:</b> {{ $data['record']->address}}</p>
+                        <p><b>Address:</b> {{$data['record']->address->city->district->state->name }}, {{$data['record']->address->city->district->name }}, {{$data['record']->address->city->name }} {{ $data['record']->address->address }}</p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"  style="display: none">
                         <p>
                             <b>Image:</b>
                             @if($data['record']->image)
@@ -42,7 +42,7 @@
                             @endif
                         </p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="display: none">
                         <b>Status:</b> &nbsp;&nbsp;&nbsp;
                         <input type="radio" name="status" value="1"
                                id="activate" {{$data['record']->status?"checked":""}}>

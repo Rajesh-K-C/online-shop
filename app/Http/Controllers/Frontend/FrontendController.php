@@ -38,7 +38,6 @@ class FrontendController extends Controller
 
     public function index()
     {
-        $data['setting'] = $this->setting->getActiveSetting();
         $data['categories'] = $this->category->getActiveCategories()->orderBy('name')->get();
         $data['popular-categories'] = $this->category->getActiveCategories()->orderBy('rank')->limit(5)->get();
         //    dd($data);
